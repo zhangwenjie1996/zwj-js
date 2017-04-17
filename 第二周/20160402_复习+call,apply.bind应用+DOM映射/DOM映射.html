@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul id="ul1">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+<script type="text/javascript">
+//DOM映射机制：
+//js中获取的元素/元素集合 和页面中的元素标签/容器 是紧紧的绑定在一起的 其中一个改变 ，另一个也会跟着改变
+
+    var oUl = document.getElementById('ul1');
+    var oLis = oUl.getElementsByTagName("li");
+    console.log(oLis.length);
+
+
+</script>
+</body>
+</html>

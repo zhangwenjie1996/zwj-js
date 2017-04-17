@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            -webkit-user-select: none;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        img {
+            display: block;
+            border: none;
+        }
+
+        a {
+            display: block;
+            color: #000;
+            text-decoration: none;
+        }
+
+        a:hover, a:active, a:visited, a:target {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .banner {
+            width: 1000px;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner .bannerInner {
+            width: 1000px;
+            height: 300px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .banner .bannerInner div {
+            width: 1000px;
+            height: 300px;
+            float: left;
+            background: url("img/default.gif") no-repeat center gray;
+        }
+
+        .banner .bannerInner div img {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            display: none;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        }
+
+        .banner .bannerTip {
+            position: absolute;
+            height: 18px;
+            right: 20px;
+            bottom: 20px;
+            overflow: hidden;
+        }
+
+        .banner .bannerTip li {
+            width: 18px;
+            height: 18px;
+            background: lightblue;
+            float: left;
+            margin-right: 20px;
+            border-radius: 100%;
+        }
+
+        .banner .bannerTip li.bg {
+            background: red
+        }
+
+        .banner a {
+            background: url("img/pre.png") no-repeat;
+            opacity: 0.5;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 45px;
+            margin-top: -22.5px;
+
+        }
+
+        .banner a:hover {
+            opacity: 1;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+        }
+
+        .banner a.bannerLeft {
+            background-position: 0 0;
+            left: 20px;
+        }
+
+        .banner a.bannerRight {
+            background-position: -45px 0;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="banner" class="banner">
+    <div class="bannerInner"></div>
+    <ul class="bannerTip"></ul>
+    <a href="javascript:;" class="bannerLeft"></a>
+    <a href="javascript:;" class="bannerRight"></a>
+</div>
+<script type="text/javascript" charset="utf-8" src="js/utils-22.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/tween-22.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/banner-22.js"></script>
+
+</body>
+</html>

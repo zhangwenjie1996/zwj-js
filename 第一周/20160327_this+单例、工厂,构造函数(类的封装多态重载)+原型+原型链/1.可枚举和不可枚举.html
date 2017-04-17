@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    //    原型链模式（常用的六种继承方式）
+    Object.prototype.aaa = function () {
+    };
+    var obj = {name: "皮皮", "age": 19};
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            console.log(key)
+        }
+    }
+
+    //for in循环在遍历的时候，默认的话可以把自己私有的和在它所属类原型上扩展的属性和方法都可以遍历到，但是一般情况下，我们遍历一个对象只需要遍历私有的即可，我们可以使用以下的判断进行处理：
+    //    if(obj.propertyIsEnumerable(key)){
+    //        console.log(key);
+    //    }(这种用法不多)
+    //
+
+    //    if(obj.hasOwnProperty(key)){console.log(key)}（以后用for in遍历的时候加上这个）
+</script>
+</body>
+</html>

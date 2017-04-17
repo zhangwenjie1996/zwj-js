@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.js"></script>
+<script>
+    window.name='this is window';
+   window.onload= function () {
+       $.ajax({
+           // 设置请求首部中的Accept
+           // mimeType
+           // 该请求希望server返回什么类型的mimeType
+           accepts: 'application/json',
+           // 是否为异步请求
+           async: true,
+           // 在执行ajax的send()之前 调用此函数
+           // 用处：显示loading效果
+           beforeSend: function (xhr) {
+
+           },
+           // 是否缓存该请求
+           cache: false,
+           // 不管成功还是失败都会执行此函数
+           // 用处：关闭loading效果
+           complete: function (xhr) {
+               console.log(this);
+           },
+           // 请求首部中的content-type
+           // jquery默认所有的ajax请求全是表单提交
+           contentType: 'application/x-www-form-urlencoded',
+           // 上下文，标识success、error、complete这三个函数中的this指向
+//        context:$(div),
+           // 往服务器发送的参数
+//        data:'A=1&B=2',
+           // 按照指定格式，来格式化响应主体
+           dataType: 'text',
+           // ajax失败时执行此函数
+//           error: function (err) {
+//
+//           },
+//           // ajax成功时执行此函数
+//           success: function (data) {
+//               console.log(data);
+//           },
+           // 自定义请求首部
+           headers: {},
+           // http method
+           // mine-jquery扩展 1.9之前使用type 1.9之后使用method
+           type: 'get',//1.9.0之前用type
+           method: 'get',//1.9.0之后用method
+           // 重写server返回的mimeType
+           // 原生使用overrideMimeType()
+           mimeType: '',
+           username: '',
+           password: '',
+           // 如果data为一个对象，是否格式化为uri string格式
+           processData: true,
+           // 设置的超时毫秒数。默认为0 表示不执行超时逻辑
+           timeout: 3000,
+           // ajax请求的路径
+           url: 'json/data.json'
+       }).done(function (data) {
+           console.info(this.name);
+           console.log(data);
+           return $http.ajax('2ed');
+       }).fail(function (err) {
+           console.error(err)
+       }).always(function (data) {
+           console.log('不管你成功还是失败都会执行')
+       }).done(function (Data2) {
+           return $.ajax('2');
+       }).done(function (Data3) {
+           return $http.ajax('3');
+       });
+   } ;
+
+//    promise(只能用异步) 是一种设计模式，防止回调金字塔
+//    $.get('url1', function (data) {
+//        //do something...
+//        return $.get('url2')
+//    }).then(function (data2) {
+//        //do something...
+//        return $.get('url3')
+//    }).then(function (data3) {
+//        //do something...
+//        return $.get('url4')
+//    }).then(function (data4) {
+//        //do something...
+//        return $.get('url5')
+//    }).catch(function (e) {
+//
+//    })
+</script>
+</body>
+</html>

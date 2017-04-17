@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //    1. []是一个数组。 此数组的ISN'可言。 它被放置在页面上，一个数组，您可以访问数组的原型，像.forEach。 这仅仅是比打字快Array.prototype.forEach.call(...);接下来，forEach是一个函数，它接受一个函数作为输入...
+    //            [1,2,3].forEach(function (num) { console.log(num); });
+    //    ...并为每个在this（其中this为数组状，在于其具有一length并且您可以访问它的部件 CodeGo.net，如this[1]），它会通过三件事情： 该数组中的 在（第三的索引会通过2） 参考数组 最后，.call是一个原型的函数都有（这是一个该被调用其它函数函数）。.call将其优先和替换this与您通过任何正规函数内call作为优先（undefined或nullwindow在日常的JS，不然会被你传递什么，如果“strict模式”）。的其余部分将被传递到的原始函数。
+    //    [1, 2, 3].forEach.call(["a", "b", "c"], function (item, i, arr) {
+    //        console.log(i + ": " + item);
+    //    });
+    //    // 0: "a"
+    //    // 1: "b"
+    //    // 2: "c"
+    //    因此，您要创建一个快捷方式来调用forEach函数，你改变this从空数组所有列表<a>标记，并为每个<a>按顺序，要调用所提供的函数。
+    //    2. 该querySelectorAll方法返回一个NodeList，它类似于一个数组，但它不是很数组。因此，它不具有forEach方法（数组对象通过继承Array.prototype）。 由于NodeList类似于数组，将实际工作就可以了，所以[].forEach.call要调用的Array.prototype.forEach在的上下文方法NodeList，因为如果你已经能够简单地做yourNodeList.forEach(/*...*/)。 需要注意的是空数组字面只是到扩展版本，您可能会看到相当往往过于的快捷方式：
+    //    Array.prototype.forEach.call(/*...*/);
+    //
+    //    3. 其他的答案已经解释这段代码非常好，所以我就添加一个建议。 这是应该被重构为简明起见代码一个很好的例子。代替[].forEach.call()或Array.prototype.forEach.call()每次你做这个，做一个简单的函数出来吧：
+    //    function forEach( list, callback ) {
+    //        Array.prototype.forEach.call( list, callback );
+    //    }
+    //    现在你可以调用，而不是和晦涩的代码这个函数：
+    //    forEach( document.querySelectorAll('a'), function( el ) {
+    //        // whatever with the current node
+    //    });
+    //
+    //    4. 空数组有一个属性forEach在它的原型是一个Function对象。 （空数组只是一种简单的方法来获得一个参考forEach函数，所有Array对象有。）函数对象，反过来，有一个call属性，它也是一个函数。当你调用一个函数的call函数，它运行与该函数的给定优先this在被调用的函数。 你可以找到的call在这里发挥作用。为forEach就在这里。
+    //    5. 它可以更好
+    //    Array.prototype.forEach.call( document.querySelectorAll('a'), function(el) {
+    //    });
+    //    什么是不被document.querySelectorAll('a')返回一个对象类似于数组，但是它不从继承Array类型。 因此，我们呼吁forEach从方法Array.prototype与上下文对象作为返回值由document.querySelectorAll('a')
+    //    6. []总是返回一个新的数组，它相当于new Array()但保证返回的数组Array可以通过而被覆盖[]不能。因此，这是一种安全的方式来获得的原型Array，然后如所描述，call执行上的arraylike节点列表中的函数（这一点）。 调用一个函数在给定这个值，并提供 个别。马赛
+</script>
+</body>
+</html>

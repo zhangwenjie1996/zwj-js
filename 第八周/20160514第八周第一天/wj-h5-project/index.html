@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>wj-h5</title>
+    <link type="text/css" rel="stylesheet" href="css/animate.css">
+    <link type="text/css" rel="stylesheet" href="css/index2.css">
+    <script type="text/javascript">
+//        (function (doc, win) {
+//            var docEl = doc.documentElement,
+//                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+//                    recalc = function () {
+//                        var clientWidth = docEl.clientWidth;
+//                        if (!clientWidth) return;
+//                        docEl.style.fontSize = 10 * (clientWidth / 320) + 'px';
+//                    };
+//
+//            if (!doc.addEventListener) return;
+//            win.addEventListener(resizeEvt, recalc, false);
+//            doc.addEventListener('DOMContentLoaded', recalc, false);
+//        })(document, window);
+
+        document.documentElement.fontSize=document.documentElement.clientWidth/320*10
+    </script>
+</head>
+<body>
+
+<div id="main">
+    <div class="guide">
+        <div class="main" id="biaopan">
+            <div id="hour"></div>
+            <div id="minute"></div>
+            <div id="second"></div>
+        </div>
+        <div id="timeLabel"></div>
+        <div id="resume" class="resume animated fadeIn">呈上简历</div>
+        <img src="img/per.png" class="Match_per animated bounceInLeft"/>
+
+        <div class="line animated bounceInLeft">
+            <em></em>
+            <em></em>
+        </div>
+    </div>
+    <ul>
+        <li>
+            <h1 class="name animated flipInY">I`M<span>张雯洁</span></h1>
+            <em class="line-em"></em>
+            <ul class="coming">
+                <li><h1>我的个人简历</h1></li>
+                <li class="me"><img src="img/me2.png"></li>
+                <li class="round animated zoomIn"><img src="img/round.png"></li>
+                <li class="round2 animated bounceIn"><img src="img/round2.png"></li>
+                <li class="halo animated fadeIn"><img src="img/halo.png"></li>
+                <li class="point animated fadeIn"><img src="img/flash-point.png"></li>
+            </ul>
+            <img src="img/arr.png" alt="" class="p1_arr"/>
+        </li>
+        <li>
+            <div class="introduction">
+                <p class="animated slideInLeft">姓名:张雯洁</p>
+
+                <p class="animated slideInRight">籍贯:河南驻马店</p>
+
+                <p class="animated slideInLeft">联系方式:15893941537</p>
+
+                <p class="animated slideInRight">电子邮箱:1824932243@qq.com</p>
+            </div>
+            <div class="fire-tri"><img src="img/fire-tri.png"></div>
+        </li>
+        <li>
+            <div class="self-skills">
+                <div class="header"><img src="img/yellow-tri.png" class="yellow-tri animated bounceInLeft"/>
+                    <em id="em1" class="animated bounceInLeft"></em>
+                    <em class="animated bounceInLeft"></em>
+
+                    <h1 class="animated bounceInLeft">我的技能</h1>
+                </div>
+                <div class="skill-row">
+                    <ul>
+                        <li class="animated rotateIn">javascript</li>
+                        <li class="animated rotateIn">node.js</li>
+                        <li class="animated rotateIn">jquery</li>
+                        <li class="animated rotateIn">ajax</li>
+                        <li class="animated rotateIn">html5</li>
+                        <li class="animated rotateIn">css3</li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" charset="utf-8" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/index2.js"></script>
+<script>
+
+    function Clock() {
+        this.main = this.$("biaopan");
+        this.timeLabel = this.$("timeLabel");
+        this.hour = this.$("hour");
+        this.minute = this.$("minute");
+        this.second = this.$("second");
+        this.nowHour = null;
+        this.nowMinute = null;
+        this.nowSecond = null;
+        this.timer = null;
+        var _this = this;
+        var init = function () {
+            _this.getNowTime();
+            _this.initClock();
+            _this.InterVal();
+            window.setTimeout(function () {
+                clearInterval(_this.timer);
+                Clock = null;
+                _this.timeLabel.innerHTML = "面试时间到了！";
+                _this.timeLabel.className += " animated tada";
+                _this.main.className += " animated tada";
+            }, 2000)
+        };
+        init();
+    }
+    Clock.prototype.$ = function (id) {
+        return document.getElementById(id)
+    };
+    Clock.prototype.CreateKeDu = function (className, deg, translateWidth) {
+        var Pointer = document.createElement("div");
+        Pointer.className = className;
+        Pointer.style.transform = "rotate(" + deg + "deg) translate(" + translateWidth + "rem)";
+        this.main.appendChild(Pointer);
+    };
+    Clock.prototype.getNowTime = function () {
+        var now = new Date();
+        this.nowHour = now.getHours();
+        this.nowMinute = now.getMinutes();
+        this.nowSecond = now.getSeconds();
+    };
+    Clock.prototype.initClock = function () {
+        this.timeLabel.innerHTML = this.getZero(this.nowHour) + ":" + this.getZero(this.nowMinute) + ":" + this.getZero(this.nowSecond);
+        for (var index = 0; index < 4; index++) {
+            this.CreateKeDu("hourPointer", index * 90, 7.2);
+        }
+        for (index = 0; index < 12; index++) {
+            this.CreateKeDu("minuterPointer", index * 30, 7.0);
+        }
+        for (index = 0; index < 60; index++) {
+            this.CreateKeDu("secondPointer", index * 6, 7.1);
+        }
+        this.setPosition();
+    };
+
+    Clock.prototype.InterVal = function () {
+        clearInterval(this.timer);
+        var _this = this;
+        this.timer = setInterval(function () {
+            _this.getNowTime();
+            _this.timeLabel.innerHTML = _this.getZero(_this.nowHour) + ":" + _this.getZero(_this.nowMinute) + ":" + _this.getZero(_this.nowSecond);
+            _this.setPosition();
+        }, 1000);
+    };
+    Clock.prototype.setPosition = function () {
+        this.second.style.transform = "rotate(" + (this.nowSecond * 6 - 90) + "deg)";
+        this.minute.style.transform = "rotate(" + (this.nowMinute * 6 + 1 / 10 * this.nowSecond - 90) + "deg)";
+        this.hour.style.transform = "rotate(" + (this.nowHour * 30 + 1 / 2 * this.nowMinute + 1 / 120 * this.nowSecond - 90) + "deg)";
+    };
+
+    Clock.prototype.getZero = function (value) {
+        return value < 10 ? '0' + value : value;
+    };
+
+
+    window.onload = function () {
+        new Clock();
+    };
+
+
+</script>
+</body>
+</html>

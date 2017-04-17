@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件委托</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .tabBox {
+            margin: 10px auto;
+            width: 600px;
+            overflow: hidden;
+        }
+
+        .tabBox ul {
+            position: relative;
+            top: 1px;
+            overflow: hidden;
+        }
+
+        .tabBox ul li {
+            display: inline-block;
+            margin-right: 10px;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid green;
+        }
+
+        .tabBox ul li.bg {
+            background: lightgreen;
+            border-bottom: 1px solid lightgreen;
+        }
+
+        .tabBox div {
+            display: none;
+            height: 100px;
+            line-height: 100px;
+            border: 1px solid lightgreen;
+            text-align: center;
+            background: lightgreen;
+        }
+
+        .tabBox div.bg {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+<div class="tabBox">
+    <ul>
+        <li class="bg">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+
+    </ul>
+    <div class="bg">1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+</div>
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    //    $(function () {
+    //        $(".tabBox li").on("click", function () {
+    //            $(this).addClass("bg").siblings().removeClass("bg");
+    //
+    //        });
+    //    });
+
+
+    //    事件委托/事件代理
+    //    ->主要是利用了事件的冒泡传播机制，假如一个容器中很多元素都需要绑定点击事件，传统的方案是获取到这些元素之后，循环一个个的绑定点击事件，但是现在不用了，我们可以把所有元素的点击事件委托给最外层的这个盒子进行处理
+    //    不管点击里面的哪个元素，外层盒子的点击行为也会被触发，对应的外层盒子点击行为对应绑定的方法也会被执行，我们此时可以通过传递进来的鼠标事件对象中的事件源来获取到点击的是具体的哪个元素，然后在实现相关的操作即可
+
+    //    2.想要阻止某一个元素的事件委托，只需要阻止当前元素某个行为的冒泡传播即可
+    $(function () {
+        $(".tabBox").on("click", function (e) {
+            var $tar = $(e.target);
+            console.log($tar);
+            var index = $tar.index();
+            if ($tar[0].tagName.toLowerCase() === "li") {
+                $tar.addClass('bg').siblings().removeClass('bg');
+            }
+
+            $tar.parent().nextAll().eq(index).addClass('bg').siblings().removeClass('bg');
+        });
+        $(".tabBox>div").on("click", function (e) {
+            e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+        })
+    })
+
+</script>
+</body>
+</html>

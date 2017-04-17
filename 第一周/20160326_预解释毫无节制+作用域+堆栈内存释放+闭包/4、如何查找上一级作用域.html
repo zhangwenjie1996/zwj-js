@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //    var num = 12;
+    //    function fn() {
+    //        console.log(num);
+    //    }
+    //    fn();//12
+
+    //如何查找上级作用域：
+    //就看当前函数对应的那个堆内存是在哪个作用域下定义的，那么当前函数的上级作用域就是谁（和函数在哪执行的没有任何的关系）
+    var num = 12;
+    function fn() {
+        var num = 120;
+        return function () {
+            console.log(num);
+        }
+
+    }
+    var f = fn();
+    f();//120
+
+    function sum() {
+        var num = 1200;
+        f();//120//就看当前函数对应的那个堆内存是仍然是在fn作用域下定义的，那么f的上级作用域仍然是fn（和函数在哪执行的没有任何的关系）
+    }
+    sum();
+
+</script>
+</body>
+</html>

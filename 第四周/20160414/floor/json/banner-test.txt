@@ -1,0 +1,1 @@
+[{"img":"img/banner1.jpg","desc":"这是第一个"},{"img":"img/banner2.jpg","desc":"这是第er个"},{"img":"img/banner3.jpg","desc":"这是第s个"}]

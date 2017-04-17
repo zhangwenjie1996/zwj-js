@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Person(name) {
+//        console.log(this);//this -teacher
+        this.name = name; //teacher.name=zfpx
+//        console.log( this.name);
+    }
+    Person.prototype.showName = function () {
+        console.log(8);//abc
+        return 8
+    };
+
+    function Teacher(name) {//this -teacher
+        Person.call(this, name);// 把person中的this改变成这个teacher实例 name是传入的zfpx，给person函数传入形参name=zfpx
+        this.name = 'abc';
+    }
+    Teacher.prototype = new Person();//没有传参 name=undefined
+    //    Teacher.prototype = new Person("zwj");//如果传参 name=zwj
+    //    Teacher.prototype = Object.create(Person.prototype);
+
+    var teacher = new Teacher('zfpx');
+    console.log(teacher);//Teacher {name: "abc"}
+    console.log(teacher.showName());//没有返回值 所以是undefined
+    console.log(teacher.name);//abc
+    console.log(teacher.__proto__.name);//没有传参数undefined //如果传参 name=zwj
+    //    Object.create = function(proto){
+    //     function Temp(){
+    //
+    //     }
+    //     Temp.prototype = proto;
+    //     return new Temp(); //__proto__
+    //     }
+
+
+</script>
+</body>
+</html>

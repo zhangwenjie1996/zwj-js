@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            -webkit-user-select: none;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        img {
+            display: block;
+            border: none;
+        }
+
+        a {
+            display: block;
+            color: #000;
+            text-decoration: none;
+        }
+
+        a:hover, a:active, a:visited, a:target {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .menu {
+            width: 50%;
+        }
+
+        .menu .menuList {
+            overflow: hidden;
+            height: 0;
+            background: yellow;
+        }
+
+        .menu h2 {
+            height: 30px;
+            line-height: 30px;
+            background: blue;
+            color: #ffffff;
+        }
+
+    </style>
+</head>
+<body>
+<div id="menu" class="menu">
+    <ul>
+        <li>
+            <h2>标题一</h2>
+            <ul class="menuList" style="height: inherit;">
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+            </ul>
+        </li>
+        <li>
+            <h2>标题二</h2>
+            <ul class="menuList">
+                <li>衣服2</li>
+                <li>衣服2</li>
+                <li>衣服2</li>
+            </ul>
+        </li>
+        <li>
+            <h2>标题3</h2>
+            <ul class="menuList">
+                <li>衣服3</li>
+                <li>衣服3</li>
+                <li>衣服3</li>
+                <li>衣服3</li>
+                <li>衣服3</li>
+                <li>衣服3</li>
+                <li>衣服3</li>
+                <li>衣服3</li>
+            </ul>
+        </li>
+        <li>
+            <h2>标题4</h2>
+            <ul class="menuList">
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+                <li>衣服4</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" charset="utf-8" src="js/utils-22.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/tween-22.js"></script>
+<script type="text/javascript">
+    ~function () {
+        var menu = document.getElementById('menu'), oH2s = menu.getElementsByTagName('h2');
+        for (var i = 0, len = oH2s.length; i < len; i++) {
+            ~function (i) {
+                var curH2 = oH2s[i];
+                curH2.onclick = function () {
+                    var parentsSiblings = utils.siblings(this.parentNode);
+                    for (var a = 0, len = parentsSiblings.length; a < len; a++) {
+                        var eachParentsSiblings = parentsSiblings[a];
+                        var eachSiblingsUl = utils.children(eachParentsSiblings, "ul");
+                        zhufengAnimate(eachSiblingsUl[0], {height: 0}, 500);
+                    }
+                    var menuUl = utils.next(this), oLis = utils.children(menuUl, "li");
+                    var oHeight = 0;
+                    for (var k = 0; k < oLis.length; k++) {
+                        oHeight += oLis[k].offsetHeight;
+                    }
+                    utils.css(menuUl, "height") <= 0 ? zhufengAnimate(menuUl, {height: oHeight}, 500) : zhufengAnimate(menuUl, {height: 0}, 500);
+                }
+            }(i)
+        }
+    }()
+
+</script>
+</body>
+</html>

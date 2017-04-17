@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训-jQuery版轮播图(渐隐渐现)</title>
+    <link type="text/css" rel="stylesheet" href="css/banner.css"/>
+</head>
+<body>
+<div class="banner" id="bannerFir">
+    <div class="bannerInner"></div>
+    <ul class="bannerTip"></ul>
+    <a href="javascript:;" class="bannerLeft"></a>
+    <a href="javascript:;" class="bannerRight"></a>
+</div>
+
+<div class="banner" id="bannerTwo">
+    <div class="bannerInner"></div>
+    <ul class="bannerTip"></ul>
+    <a href="javascript:;" class="bannerLeft"></a>
+    <a href="javascript:;" class="bannerRight"></a>
+</div>
+
+<script charset="utf-8" type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/banner.js"></script>
+<script type="text/javascript">
+    $("#bannerFir").banner("json/banner.txt", 1000);
+    $("#bannerTwo").banner("json/banner2.txt", 2000);
+    // 1)  $().banner(bannerFir, "json/banner.txt", 3000);//在JS中我们可以直接使用元素的ID获取这个元素,不需要使用getElementById获取(不推荐)这点在jQuery中同样适用eg：$(banner) 什么也不输出  $(bannerTwo) 正常输出
+    //     $().banner(bannerTwo, "json/banner.txt", 1000);
+    //2)   $().banner("bannerFir", "json/banner.txt", 3000);
+    //     $().banner("bannerTwo", "json/banner.txt", 1000);
+    // 3)
+    //    $("#bannerFir").banner("json/banner.txt", 3000);
+    //    $("#bannerTwo").banner("json/banner.txt", 1000);
+    //    $()实例
+</script>
+</body>
+</html>

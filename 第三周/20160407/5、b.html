@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            margin: auto;
+
+        }
+
+        .container {
+            width: 1210px;
+            margin: auto;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        a:hover, a:active, a:link, a:target {
+            color: #000;
+            text-decoration: none;
+        }
+
+        #linkTo {
+            width: 30px;
+            overflow: hidden;
+            z-index: 5;
+            position: fixed;
+            left: 34.5px;
+            top: 50%;
+            margin-top: -105px;
+            display: none;
+        }
+
+        #linkTo ul {
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, .8);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ccffffff, endColorstr=#ccffffff)
+        }
+
+        #linkTo li {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .main {
+            width: 100%;
+            background: azure;
+            color: #000;
+            font-size: 100px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="f0"><img src="image/top1.png" alt=""/></div>
+    <div class="f01"><img src="image/top2.png" alt=""/></div>
+    <div class="f02"><img src="image/top3.png" alt=""/></div>
+    <div class="main" id="main">
+
+        <div class="f1"><img src="image/floor1.png"></div>
+
+        <div class="f2"><img src="image/floor2.png"></div>
+
+        <div class="f3"><img src="image/floor3.png"></div>
+        <div class="f4"><img src="image/floor4.png"></div>
+
+        <div class="f5"><img src="image/floor5.png"></div>
+
+        <div class="f6"><img src="image/floor6.png"></div>
+        <div class="f7"><img src="image/floor7.png"></div>
+
+    </div>
+</div>
+<div id="linkTo">
+    <ul>
+
+        <li a="1F" b="服装">
+            1F
+        </li>
+        <li a="2F" b="美妆">
+            2F
+        </li>
+        <li a="3F" b="手机">
+            3F
+        </li>
+        <li a="4F" b="电器">
+            4F
+        </li>
+        <li a="5F" b="数码">
+            5F
+        </li>
+        <li a="6F" b="健身">
+            6F
+        </li>
+        <li a="7F" b="居家">
+            7F
+        </li>
+    </ul>
+</div>
+<div style="height: 100px;background:black;text-align: center;color: #FFFFFF;line-height: 100px">版权版权版权版权版权版权版权</div>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+    ~function () {
+        var linkTo = document.getElementById("linkTo");
+        var clientH = utils.win("clientHeight");
+        var main = document.getElementById('main');
+        var oDiv = main.getElementsByTagName('div');
+        var oLis = document.getElementsByTagName("li");
+
+        function myFunction() {
+            for (var i = 0, len = oLis.length; i < len; i++) {
+                oLis[i].index = i;
+                oLis[i].onclick = function () {
+                    window.onscroll = null;
+                    var _this = this.index;
+                    var curDiv = oDiv[_this];
+                    var target = utils.win("scrollTop"), duration = 500, interval = 10, step = (target / duration) * interval;
+                    var nowTop = utils.win("scrollTop");
+                    this.onmouseout = null;
+
+                    if (nowTop > utils.offset(curDiv).top) {
+                        var timer = window.setInterval(function () {
+                            if (nowTop <= utils.offset(curDiv).top) {
+                                document.documentElement.scrollTop = utils.offset(curDiv).top;
+                                document.body.scrollTop = utils.offset(curDiv).top;
+                                window.clearInterval(timer);
+                                window.onscroll = windowScroll;
+                                return;
+                            }
+                            nowTop = nowTop - step;
+                            utils.win("scrollTop", nowTop)
+
+                        }, 10)
+                    } else {
+                        var timer = window.setInterval(function () {
+                            if (nowTop >= utils.offset(curDiv).top) {
+                                document.documentElement.scrollTop = utils.offset(curDiv).top;
+                                document.body.scrollTop = utils.offset(curDiv).top;
+                                window.clearInterval(timer);
+                                window.onscroll = windowScroll;
+                                return;
+                            }
+                            nowTop = nowTop + step;
+                            utils.win("scrollTop", nowTop)
+
+                        }, 10)
+                    }
+
+                }
+
+            }
+        }
+
+        myFunction();
+        function mouse() {
+            for (var i = 0, len = oLis.length; i < len; i++) {
+                oLis[i].onmouseover = function () {
+                    this.innerHTML = this.getAttribute("b");
+                    this.style.background = 'red';
+                    this.style.color = 'white';
+                    utils.sibling(this).style.color = "black";
+                    utils.sibling(this).style.background = '';
+                };
+                oLis[i].onmouseout = function () {
+                    this.innerHTML = this.getAttribute("a");
+                    this.style.background = '';
+                    this.style.color = 'black';
+                }
+            }
+        }
+
+        mouse();
+        window.onscroll = windowScroll;
+        function windowScroll() {
+            var curTop = utils.win("scrollTop");
+            linkTo.style.display = curTop >= clientH ? "block" : "none";
+            for (var i = 0, len = oDiv.length; i < len; i++) {
+                var nowTop = utils.win("scrollTop");
+                var curT = utils.offset(oDiv[i]).top;
+                if (curT <= nowTop + oDiv[i].clientHeight / 2 && nowTop < (oDiv[i].clientHeight / 2 + curT)) {
+                    oLis[i].innerHTML = oLis[i].getAttribute("b");
+                    oLis[i].style.color = 'red';
+                    oLis[i].style.background = '';
+
+                } else {
+                    oLis[i].innerHTML = oLis[i].getAttribute("a");
+                    oLis[i].style.background = '';
+                    oLis[i].style.color = 'black';
+                }
+            }
+
+        }
+
+        window.onscroll = windowScroll;
+    }();
+</script>
+</body>
+</html>

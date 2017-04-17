@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    function fn1(){console.log(1);}
+    function fn2(){console.log(2);}
+    fn1.call(fn2);//->执行call方法,首先让fn1中的"this关键字"变为fn2,然后在让fn1执行 ->1
+    fn1.call.call.call.call.call(fn2);//->让最后一个call方法执行,首先让this(fn1.call.call.call.call-myCall这个方法体)这个函数中的"this关键字",变为fn2,然后让myCall执行 ->由于函数体代码中的this关键字已经变为了fn2,所以出现的this()相当于fn2() ->2
+    Function.prototype.call(fn1);//->让Function.prototype中的"this关键字"变为fn1,然后在让Function.prototype执行  ->Function.prototype是一个比较特殊的空函数/匿名函数,所以它执行的时候啥都不会输出
+    Function.prototype.call.call.call(fn2);//->让Function.prototype.call.call(myCall)中的"this关键字"变为fn2,然后让myCall方法执行 ->2
+
+    //->自己写一个叫做myCall的方法,实现和call一模一样的功能
+    Function.prototype.myCall = function myCall() {
+        //->myCall方法在执行的时候,里面的this代表的就是我接下来要操作的这个函数
+        //->1、首先让fn中的"this关键字"变为obj ->首先让this这个函数中的"this关键字"变为第一个参数值arguments[0]
+        //->2、让fn这个函数执行 ->让this这个函数执行
+        this();  //1-myCall中的this是fn,fn()  2-myCall方法中的this是fn2,fn2()
+    };
+    //    fn.myCall(obj);
+    //    fn2.myCall(obj2);
+
+
+
+
+    //    function fn() {
+    //        console.log(this);
+    //    }
+    //    var obj = {name: "珠峰"};
+    //1-call方法执行时候的作用?(apply和call的作用是一模一样的)
+    //->把某个方法中的this关键字变为第一个参数值
+    //->在让这个方法执行
+
+    //2-bind方法执行时候的作用?(在IE6~8中不支持这个方法)
+    //->把某个方法中的this关键字变为第一个参数值
+    //->JS中的预处理机制(柯理化函数思想),只是预先的把this替换为想要的;
+
+    //fn.call(obj);
+    //    var fn2 = fn.bind(obj);
+    //    fn2();
+
+    //fn();//->this是window
+    //obj.fn(); //->obj下没有fn这个属性,所以无法执行
+    //fn.call(obj);//->fn首先找到Function.prototype上的call方法,然后让这个call方法执行,在这个call方法执行的时候:
+    //1)首先让fn中的"this关键字"变为obj
+    //2)然后在让fn这个函数执行
+
+
+    //fn.call//->fn首先通过原型链找到自己所属类Function.prototype上的call方法 fn.__proto__.call  Function.prototype.call
+    //fn.call();//->找到call之后在让内置的方法call执行
+
+    //->ary找到一个自己的属性名为slice的属性,获取它的属性值;但是slice不是私有的属性而是Array.prototype上的公有的属性
+    //    ary.slice
+    //    ary.__proto__.slice
+    //    Array.prototype.slice
+    //ary.slice();//-
+
+</script>
+</body>>ary首先通过原型链的机制找到Array.prototype上的slice方法,并且让slice方法执行->slice方法执行的时候做了一件事:把ary克隆一份一模一样的
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        input {
+            outline: none;
+            border: none;
+        }
+
+        .container {
+            width: 50%;
+            text-align: center
+        }
+
+        .container .row {
+            width: 100%;
+            height: 100px;
+
+        }
+
+        .container .row label {
+            width: 20%;
+            height: 32px;
+            line-height: 32px;
+            display: inline-block;
+        }
+
+        .container .row input {
+            width: 80%;
+            height: 32px;
+            line-height: 32px;
+            padding: 10px 0;
+        }
+
+        .container .row span {
+            display: none;
+            color: gray;
+
+        }
+
+        .container .row .form {
+            border: 2px solid gray;
+
+        }
+        .container .row .ok{
+            border:2px solid blue;}
+        .container .row .error{
+            border: 2px solid red;}
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="form">
+            <label>用户名</label><input id="userName" type="text" placeholder="您的账户名或登录名">
+        </div>
+        <span id="spanName"></span>
+    </div>
+    <div class="row">
+        <div class="form">
+            <label>邮箱</label><input id="userEmail" type="text" placeholder="您的邮箱地址">
+        </div>
+        <span id="spanEmail"></span>
+    </div>
+    <div class="row">
+        <div class="form">
+            <label>手机号</label><input id="userPhone" type="text" placeholder="您的邮箱地址">
+        </div>
+        <span id="spanPhone"></span>
+    </div>
+    <div class="row">
+        <div class="form">
+            <label>身份证号</label><input id="userID" type="text" placeholder="您的邮箱地址">
+        </div>
+        <span id="spanID"></span>
+    </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+    ~function () {
+        var userName = document.getElementById('userName'), spanName = document.getElementById('spanName'), userEmail = document.getElementById('userEmail'), spanEmail = document.getElementById('spanEmail'), userPhone = document.getElementById('userPhone'), spanPhone = document.getElementById('spanPhone'), userID = document.getElementById('userID'), spanID = document.getElementById('spanID');
+
+        userName.onfocus= function () {
+            this.parentNode.className='ok';
+            spanName.style.display='block';
+            spanName.innerHTML = "支持中文、字母、数字、“-”“_”的组合，4-20个字符";
+        };
+        userName.onblur=userName.onkeyup=function(){
+            var val=this.value.replace(/(^ +| +$)/g,""),reg=/^([a-zA-Z-0-9_]|[-]|[\u4e00-\u9fa5]){4,20}$/;
+           if(!reg.test(val)||val.length==0){
+               this.parentNode.className='error';
+               spanName.style.display='block';
+               spanName.innerHTML=val.length==0?"支持中文、字母、数字、“-”“_”的组合，4-20个字符":"格式错误";
+          return;
+           }
+            spanName.style.display='none';
+            this.parentNode.className='form';
+        };
+
+        userEmail.onfocus= function () {
+            this.parentNode.className='ok';
+            spanEmail.style.display='block';
+            spanEmail.innerHTML = "请输入您的邮箱~~";
+        };
+        userEmail.onblur=userEmail.onkeyup=function(){
+            var val=this.value.replace(/(^ +| +$)/g,""),reg= /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+            if(!reg.test(val)||val.length==0){
+                this.parentNode.className='error';
+                spanEmail.style.display='block';
+                spanEmail.innerHTML=val.length==0?"输入你常用邮箱~~":"格式错误";
+                return;
+            }
+            spanEmail.style.display='none';
+            this.parentNode.className='form';
+        };
+
+        userPhone.onfocus= function () {
+            this.parentNode.className='ok';
+            spanPhone.style.display='block';
+            spanPhone.innerHTML = "请输入您的手机号~~";
+        };
+        userPhone.onblur=userPhone.onkeyup=function(){
+            var val=this.value.replace(/(^ +| +$)/g,""),reg=/^1[34578]\d{9}$/;
+            if(!reg.test(val)||val.length==0){
+                this.parentNode.className='error';
+                spanPhone.style.display='block';
+                spanPhone.innerHTML=val.length==0?"输入您常用的手机号~~":"格式错误";
+                return;
+            }
+            spanPhone.style.display='none';
+            this.parentNode.className='form';
+        };
+
+        userID.onfocus= function () {
+            this.parentNode.className='ok';
+            spanID.style.display='block';
+            spanID.innerHTML = "请输入您的身份证~~";
+        };
+        userID.onblur=userID.onkeyup=function(){
+            var val=this.value.replace(/(^ +| +$)/g,""),reg=/^(?:\d{6})(\d{4})(?:\d{2})(?:\d{2})(?:\d{2})(\d)(?:\d|X)$/;
+            if(!reg.test(val)||val.length==0){
+                this.parentNode.className='error';
+                spanID.style.display='block';
+                spanID.innerHTML=val.length==0?"请输入您的身份证~~":"格式错误";
+                return;
+            }
+
+            this.parentNode.className='form';
+            console.log(reg.exec(val)[2]);
+            var time=new  Date();
+            var year = time.getFullYear();
+            spanID.innerHTML =year - reg.exec(val)[1];
+            spanID.innerHTML+=(reg.exec(val)[2])%2===0?"女":"男";
+        }
+    }();
+
+
+</script>
+</body>
+</html>

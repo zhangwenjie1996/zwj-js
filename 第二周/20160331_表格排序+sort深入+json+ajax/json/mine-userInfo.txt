@@ -1,0 +1,1 @@
+[{"name":"漩涡鸣人","age":18,"sex":0,"force":100},{"name":"宇智波佐助","age":19,"sex":0,"force":99.5},{"name":"宇智波鼬","age":22,"sex":0,"force":98},{"name":"小樱","age":19,"sex":1,"force":80},{"name":"卡卡西","age":24,"sex":0,"force":90},{"name":"我爱罗","age":17,"sex":0,"force":92}]

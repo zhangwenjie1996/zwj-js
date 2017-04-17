@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    //  Object.create学习参考网址：  https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+    //Object.create(proObj):创建一个新的对象，但是还要把proObj作为这个对象(所属类)的原型 在ie6~8不兼容（ECMAScript）
+    var obj = {
+        getX: function () {
+
+        }
+    };
+    var obj2 = Object.create(obj);
+    console.log(obj2);//{}
+    console.dir(obj2); //obj2    __proto__:
+    // getX:function....
+    // __proto__:Object.prototype
+
+    function object(o) {
+        function Fn() {
+
+        }
+
+        Fn.prototype = o;
+        return new Fn;
+    }
+    var newObj = object(obj);
+    console.dir(newObj);
+
+
+    //Shape - superclass
+    function Shape() {
+        this.x = 0;
+        this.y = 0;
+        this.name = 'zwj'
+    }
+
+    Shape.prototype.move = function (x, y) {
+        this.x -= x;
+        this.y -= y;
+//        console.log( this.x,this.y);
+        console.info("Shape moved.");
+        return this.x + this.y;
+    };
+
+    // Rectangle - subclass
+    function Rectangle() {
+//        Shape.call(this); //call super constructor. call只继承私有的
+    }
+    //    Rectangle.prototype.getX= function () {
+    //        console.log('ok or no');
+    //    };//放在  Rectangle.prototype  = Object.create(Shape.prototype);上面 会被下面的替换掉 即最终 Rectangle.prototype上没有getX方法 只有Shape.prototype上的方法
+    Rectangle.prototype = Object.create(Shape.prototype);//只能获取Shape原型上的属性和方法 Shape上私有的属性和方法获取不到 若就想获取到私有的 如name值 则就要Rectangle函数体中执行call继承了把Shape里的this改变为Rectangle中的this即当前实例，对于new Rectangle中函数体中的this是当前实例而原型中的不一定 要看执行时候.前面是谁;或者 直接Rectangle.prototype=new Shape;原型继承不要  Rectangle.prototype = Object.create(Shape.prototype);了
+    //    Rectangle.prototype=new Shape;//私有公有都获取到了  Rectangle.prototype会输出Shape {x: 0, y: 0, name: "zwj"}
+    Rectangle.prototype.getX = function () {
+        console.log('ok or no');
+    };//Rectangle.prototype上getX方法 Shape.prototype上的方法都有
+    console.log(Rectangle.prototype)//getX move
+    //   console.log(Rectangle.prototype)//若是通过原型继承即Rectangle.prototype=new Shape，则Rectangle.prototype=Shape{x: 0, y: 0, name: "zwj"}并且有原型上的getX和move方法若是通过 Rectangle.prototype = Object.create(Shape.prototype)；则不会有私有的方法和属性
+    console.log(Shape.prototype);//move
+
+    //    Rectangle.prototype = new Shape;
+    var rect = new Rectangle();
+    console.log(rect instanceof Rectangle);  //true.
+    console.log(rect instanceof Shape); //true.
+
+    console.log(rect.move(1, 1)); //函数的返回结果 看是否有return返回值 -2
+    console.log(rect.name); //zwj
+    console.log(rect.getX); //ok or no
+    console.log(rect, rect.x); //
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- 异步请求 http://localhost:63342/请求本地服务器80端口-->
+</head>
+<body>
+<script>
+
+//    <!-- 这个方法一定是全局的-->
+    function handle(data) {
+        console.log('这是我要处理的数据：', data)
+    }
+//    window.onload = function () {
+//        var script = document.createElement('script');
+//        script.src = 'http://localhost:80/interface?valName=abc';
+//        if ('onload' in script) {
+//            script.onload = function () {
+////                console.log(abc);
+//                handle(abc);
+//            }
+//        } else {
+//            script.onreadystatechange = function () {
+//                if (script.readyState == 'loaded') {
+////                    console.log(abc);
+//                    handle(abc);
+//                }
+//            };
+//        }
+//        document.body.appendChild(script);
+//    }
+</script>
+
+<!--   jsonp的请求后面需要加一个jsonpcallback(就是那个key)和一个全局方法的名字-->
+<!--   所有的jsonp必须要有这样的格式（这是强烈要求的）-->
+<script src="http://localhost:80/interface?valName=handle"></script>
+</body>
+</html>

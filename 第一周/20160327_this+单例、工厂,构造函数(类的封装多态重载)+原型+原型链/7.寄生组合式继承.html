@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    function A() {
+        this.x = 100;
+        this.name="zwj"
+    }
+    A.prototype.getX = function () {
+        console.log(this.x);
+        return 2
+    };
+    function B() {
+//        A.call(this);//
+    }
+    B.prototype = Object.create(A.prototype);//Object.create()只能获取原型上的属性和方法
+//    B.prototype={
+//        name:"zwj"
+//    }
+//    B.prototype = new A;
+    B.prototype.constructor = B;
+
+    var n = new B;
+    console.log(n.x, n.name,n.getX());
+    console.log(n);
+
+//    function objectCreate(o) {
+//        function fn() {
+//
+//        }
+//
+//        fn.prototype = o;
+//        return new fn;
+//    }
+
+</script>
+</body>
+</html>

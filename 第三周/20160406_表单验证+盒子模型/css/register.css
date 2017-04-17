@@ -1,0 +1,87 @@
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+    font: 14px "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif
+}
+
+.box {
+    width: 400px;
+    margin: auto;
+}
+
+
+.box label, .box input, .box span {
+    display: block;
+}
+
+.box label {
+    width: 90px;
+    height: 52px;
+    padding-left: 20px;
+    line-height: 52px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.box label, .box input {
+    display: inline-block;
+}
+
+.box input {
+    width: 200px;
+    height: 32px;
+    line-height: 32px;
+    padding: 10px 0;
+    outline: none;
+    border: none;
+}
+.form {
+    border: 4px solid gray;
+}
+
+.success{
+    border:4px solid green;
+}
+.error{
+    border: 4px solid red;
+}
+.box span {
+    display: none;
+    line-height: 28px;
+    color: gray;
+    letter-spacing: 1px;
+    text-indent: 5px;
+}
+.row1{
+    height: 100px;}
+#codeDiv {
+    /* margin: 20px auto; */
+    width: 70px;
+    /* height: 50px; */
+    line-height: 40px;
+    text-align: center;
+    /* border: 1px solid red; */
+    cursor: pointer;
+    letter-spacing: 5px; /*增加文字之间的间距的*/
+    background: blanchedalmond;
+
+    /*使用CSS3中的线性背景颜色渐变*/
+    background: -webkit-linear-gradient(top left, chartreuse, coral, cornflowerblue, crimson);
+    background: -moz-linear-gradient(top left, chartreuse, coral, cornflowerblue, crimson);
+    background: -ms-linear-gradient(top left, chartreuse, coral, cornflowerblue, crimson);
+    background: -o-linear-gradient(top left, chartreuse, coral, cornflowerblue, crimson);
+    background: linear-gradient(top left, chartreuse, coral, cornflowerblue, crimson);
+    display: inline-block;
+}
+#judge{
+    font-size: 14px;
+    color: #000;
+}
+.pd{
+    background: #4f66ff;
+    color: #FFFFFF;
+}
+.pd2{
+    background: none;
+}

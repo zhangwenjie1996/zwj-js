@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //冒充对象继承：把父类私有的+公有的克隆一份一模一样的给子类私有的
+    function A() {
+        this.x = 100;
+    }
+    A.prototype.getX = function () {
+        console.log(this.x);
+        return 88
+    };
+    function B() {
+        var temp = new A;
+        for (var key in temp) {
+//            if(temp.propertyIsEnumerable(key)){
+//                console.log(key);
+//            }
+//            if(temp.hasOwnProperty(key)){
+//
+//            }//写上这就只能循环获取到私有属性，key只是私有的
+            this[key] = temp[key];
+        }
+        temp = null;
+    }
+    var n = new B;
+//    n.getX();//之后的n.getX都是自己私有的和父类就不再有关系了
+    console.log(n.getX())
+</script>
+</body>
+</html>

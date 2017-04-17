@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>柯理化函数</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            cursor: pointer;
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    //->柯理化函数思想:一个JS预先处理的思想->利用函数执行可以形成一个不销毁的私有作用域的原理,把需要预先处理的内容都存在这个不销毁的作用域中,并且返回一个小函数,以后我们执行的都是小函数,在小函数中把之前预先存储的值进行相关的操作处理即可
+//
+//    Function.prototype.myBind = function myBind(context) {
+//        //this->fn
+//        var _this = this;
+//        var outerArg = Array.prototype.slice.call(arguments, 1);//[100, 200]
+//        console.log(outerArg)//[100, 200]
+////        ->兼容
+//        if ("bind" in Function.prototype) {
+//
+//            return this.bind.apply(this, [context].concat(outerArg));
+//        }
+////        ->不兼容
+//        return function (e) {
+//            var innerArg = Array.prototype.slice.call(arguments, 0);//[MouseEvent]
+//            console.log(innerArg);//写不写e，浏览器都会默认给function传入e事件对象 [MouseEvent]
+//            innerArg.length === 0 ? innerArg[innerArg.length] = window.event : null;
+//            _this.apply(context, outerArg.concat(innerArg));
+//        }
+//    };
+//function add(n, m) {
+//    var outerArg = Array.prototype.slice.call(arguments, 2);
+//    console.log(this, n, m,outerArg);
+//}
+// add(1,2,3,4)
+    var obj = {name: "珠峰培训"};
+    function fn(num1, num2, e) {//传入e参数 输出 [MouseEvent]
+        console.log(this, num1, num2, e);
+    }
+
+//    document.body.onclick = fn.myBind(obj, 100, 200);//myBind中的this看.是fn，myBind方法把fn中的this改变成了obj
+//    document.body.onclick=fn.bind.apply([obj,100,200]);//报错 Uncaught TypeError: Bind must be called on a function
+//    document.body.onclick=fn.bind.apply(fn,[obj,100,200]);
+
+
+
+////    bind:把传递进来的callBack这个方法中的this预先处理为context
+//            function bind(callBack, context) {
+//
+//                var outerArg = Array.prototype.slice.call(arguments, 2);
+//                console.log(outerArg);
+//                return function (e) {//写不写e，浏览器都会默认给function传入e事件对象
+//                    var innerArg = Array.prototype.slice.call(arguments, 0);
+//                    console.log(innerArg);//[MouseEvent]
+//                    callBack.apply(context, outerArg.concat(innerArg));
+//                }
+//            }
+//
+//
+//            var obj = {name: "珠峰培训"};
+//            function fn(num1, num2) {
+//                console.log(this, num1, num2, arguments[2]);
+//            }
+////        document.body.onclick = fn;//->fn中的this:body num1:MouseEvent num2:undefined
+////        document.body.onclick = fn.bind(obj, 100, 200);//->除了预先处理了this和需要手动传递的参数值以外,把浏览器默认给传递的鼠标事件对象也进行预先处理了
+//        document.body.onclick = bind(fn, obj, 100, 200);//还有一个浏览器默认传入的e事件对象
+////
+////
+////        document.body.onclick = function (e) {
+////            //->给元素的某一个行为绑定方法,当行为触发的时候,执行的对应的方法,此时方法中的this是当前元素本身;而且浏览器还会给当前的方法默认的传递一个参数值：MouseEvent(鼠标事件对象) 在IE6~8下并没有传递这值 window.event中存储这个值呢
+////            console.log(e);
+////        };
+//
+//
+////    window.setTimeout(bind(fn, obj, 100, 200), 1000);//->给定时器绑定一个方法,当定时器到达时间的时候,让fn执行,并且让fn中this变为obj
+////    window.setTimeout(fn.bind(obj, 100, 200), 1000);
+</script>
+</body>
+</html>

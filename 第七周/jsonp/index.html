@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<iframe src="http://www.baidu.com"></iframe>
+<script>
+
+//    //跨域了
+//    var xhr= new XMLHttpRequest();
+//    xhr.open('get','http://www.baidu.com');
+//    xhr.onreadystatechange=function(){
+//        if(xhr.readyState === 4&&/2\d{2}/.test(xhr.status)){
+//            console.log(xhr.responseText)
+//        }
+//    }
+//    xhr.send();
+//    //    XMLHttpRequest cannot load https://www.baidu.com/. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.
+
+window.onload= function () {
+    var iframe=document.frames[0];
+    console.log(iframe.contentDocument)
+};
+//安全错误：Uncaught SecurityError: Blocked a frame with origin "https://www.baidu.com" from accessing a frame with origin "http://localhost:63342".  The frame requesting access has a protocol of "https", the frame being accessed has a protocol of "http". Protocols must match.
+</script>
+</body>
+</html>

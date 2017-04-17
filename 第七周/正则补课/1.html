@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //    匹配不捕获：问号要放在括号里，并且后面加上冒号
+    //    非贪婪匹配
+    //    正则的两个特点：懒惰，贪婪
+    var reg = /\d+/;
+
+    var result1 = reg.exec(str);//返回值是数组，总正则捕获到的内容放在数组的第0项
+    var result2 = str.match(reg);//在正则不加分组的情况下，这两个方法作用一样
+
+    var reg = /(\d+)/;
+    reg.test(str);
+    RegExp.$1;
+
+    var str = "abc145827xyz09932disglo552"
+    var reg = /(\d+)/g;
+    //    当正则加了修正符g之后，每匹配一次，则修改一次reg.lastIndex属性（用来记录下一次匹配开始的索引位置）
+    reg.exec(str);
+    reg.test(str);
+    RegExp.$1;
+    console.log(RegExp.$1);
+
+
+    reg.lastIndex = 0;//手动归0
+
+    //    把？放在量词的后边，表示非贪婪匹配//    [\s\S]*?
+
+    var reg = /\d+?/g;
+    console.log(str.match(reg));//把数字分解捕获
+
+    var reg = /\d+?/;
+    console.log(str.match(reg));//只把第一个数字捕获了
+</script>
+
+</body>
+</html>

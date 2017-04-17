@@ -1,0 +1,28 @@
+{
+  "data":[
+
+    {
+      "server-address": "192.108.0.1",
+      "api-address": "user/xx",
+      "data": "{id=}",
+      "type": "get"
+    },
+    {
+      "server-address": "192.108.0.2",
+      "api-address": "user2/xx"
+    },
+    {
+      "server-address": "192.108.0.3",
+      "api-address": "add/xx"
+    },
+    {
+      "server-address": "192.108.0.4",
+      "api-address": "user4/xx"
+    },
+    {
+      "server-address": "192.108.0.5",
+      "api-address": "user5/xx"
+    }
+
+  ]
+}

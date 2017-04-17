@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    function Car(desc) {
+        this.desc = desc;
+        this.color = "red";
+    }
+
+    Car.prototype = {
+        getInfo: function () {
+            return 'A ' + this.color + ' ' + this.desc + '.';
+        },
+        x: 100
+    };
+    //instantiate object using the constructor function
+    var car = Object.create(Car.prototype);//不能获取私有的 所以car对象的输出仍是个空对象 但是能通过 Object.create(Car.prototype)获取到原型上的属性或者方法
+    //var car =  new Car();//new 一个car实例 因为此时的car有私有的属性 会输出私有的属性 不在是个空对象 {desc: undefined, color: "red"}
+    //car.color = "blue";
+    console.log(car);
+    console.log(car.__proto__.__proto__ == Object.prototype);
+    console.log(car.__proto__ == Car.prototype);
+    console.log(car.getInfo());
+    console.log(car.color);
+    console.log(car.x);
+</script>
+</body>
+</html>

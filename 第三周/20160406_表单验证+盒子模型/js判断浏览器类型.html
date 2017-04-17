@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .box {
+            margin: 100px;
+            border: 10px solid green;
+            padding: 30px;
+            width: 200px;
+            height: 200px;
+            line-height: 25px;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    站在台风口上,猪都能飞起来~~;要得到你必须要付出,要付出你还需要学会坚持,如果你真的觉得很难,那你就放弃,但是一但放弃就不要在抱怨,我觉得人生就是这样,世界真的是平衡的,每个人都是通过自己的努力,去决定自己生活的样子;
+</div>
+<script language="JavaScript">
+
+    function getOs()
+    {
+        var OsObject = "";
+        if(navigator.userAgent.indexOf("MSIE")>0) {
+            return "MSIE";
+        }
+        if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){
+            return "Firefox";
+        }
+        if(isChrome=navigator.userAgent.indexOf("Chrome")>0) {
+            return "Chrome";
+        }
+        if(isSafari=navigator.userAgent.indexOf("Safari")>0) {
+            return "Safari";
+        }
+        if(isCamino=navigator.userAgent.indexOf("Camino")>0){
+            return "Camino";
+        }
+        if(isMozilla=navigator.userAgent.indexOf("Gecko/")>0){
+            return "Gecko";
+        }
+
+    }
+    alert("您的浏览器类型为:"+getOs());
+
+</script>
+</body>
+</html>

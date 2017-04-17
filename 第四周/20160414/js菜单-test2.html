@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none;
+        }
+
+        ul, li {
+            list-style: none
+        }
+
+        /*.menu {*/
+        /*margin: 50px auto;*/
+        /*width: 150px;*/
+        /*border: 1px solid #008000;*/
+        /*border-bottom: none;*/
+        /*}*/
+
+        /*.menu h2 {*/
+        /*padding: 0 10px;*/
+        /*height: 30px;*/
+        /*line-height: 30px;*/
+        /*background: #E0F2BE;*/
+        /*cursor: pointer;*/
+        /*}*/
+
+        /*.menu li {*/
+        /*border-bottom: 1px solid #008000;*/
+        /*}*/
+
+        /*.menuList {*/
+        /*/!*display: none;*!/*/
+        /*height: 0;*/
+        /*padding: 5px 0 5px 20px;*/
+        /*overflow: hidden;*/
+        /*}*/
+
+        /*.menuList li {*/
+        /*height: 25px;*/
+        /*line-height: 25px;*/
+        /*border-bottom: none;*/
+        /*}*/
+
+        .menu {
+            width: 50%;
+
+        }
+
+        .menu h2 {
+            color: #ffffff;
+            background: blue;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .menu .menuList {
+            overflow: hidden;
+            height: 0;
+        }
+
+    </style>
+</head>
+<body>
+<div id="menu" class="menu">
+    <ul>
+        <li>
+            <h2>标题一</h2>
+            <ul class="menuList" style="height: inherit;">
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+            </ul>
+        </li>
+        <li>
+            <h2>标题二</h2>
+            <ul class="menuList">
+                <li>衣服</li>
+                <li>衣服</li>
+
+            </ul>
+        </li>
+        <li>
+            <h2>标题三</h2>
+            <ul class="menuList">
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+                <li>衣服</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" charset="utf-8" src="js/utils-test-again3.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/tween-test8.js"></script>
+<script>
+    ~function () {
+        var menu = document.getElementById('menu'), oH2s = menu.getElementsByTagName('h2');
+        ~function () {
+            for (var i = 0, len = oH2s.length; i < len; i++) {
+                var curH2 = oH2s[i];
+                curH2.onclick = function () {
+                    console.log('a');
+                    var parentsSiblings = utils.siblings(this.parentNode);
+                    var curMenu = utils.next(this);
+                    for (var a = 0, len = parentsSiblings.length; a < len; a++) {
+                        var eachParent = parentsSiblings[a];
+                        var menuSiblings = utils.children(eachParent, "ul");
+                        zhufengAnimate(menuSiblings[0], {height: 0}, 500);
+                    }
+                    var iHeight = 0, curMenuLi = utils.children(curMenu, "li");
+                    for (var k = 0; k < curMenuLi.length; k++) {
+                        iHeight += curMenuLi[k].offsetHeight;
+                    }
+                    utils.css(curMenu, "height") <= 0 ? zhufengAnimate(curMenu, {height: iHeight}, 500) : zhufengAnimate(curMenu, {height: 0}, 500);
+                }
+            }
+
+        }()
+
+    }()
+</script>
+</body>
+</html>

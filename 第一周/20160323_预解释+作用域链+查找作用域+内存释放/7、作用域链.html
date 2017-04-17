@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //1、当函数执行的时候会形成一个新的私有的作用域,来保护里面的"私有变量"不受外界的干扰,我们把函数的这种保护机制叫做"闭包"
+    //->"私有变量"
+    //1)是否为形参
+    //2)在私有作用域中有没有声明过(是否var/function过)
+    //符合以上两条中的任何一条,那么这个变量就是私有的变量,如果一条都不符合就不是私有的变量
+
+    //2、在函数执行形成的私有作用域中,JS代码执行的时候,我们遇到一个变量,首先需要看它是否为私有的变量
+    //->是私有的变量:那么在这个私有作用域中,这个变量后期的所有操作都是自己私有的,和函数外面的没有任何的关系
+    //->不是私有的变量:往当前作用域的上级作用域进行查找,是上级私有的,则相当于在当前作用域中操作上级的私有变量;如果也不是上级私有的,则继续往上找...一直找到window下为止
+    //我们把这种变量的查找过程称之为"作用域链"
+
+    console.log(num, str, boo);
+    var num = 12;
+    var str = "珠峰";//'培训'
+    var boo = false;
+    function fn(boo) {
+        console.log(num, str, boo);//undefined 'zf' true
+        var num = 130;
+        str = "培训";
+        console.log(num, str, boo);//130 '培训' true
+    }
+    fn(true);
+    console.log(num, str, boo);//12 '培训' false
+
+
+    //->如果找到window下还没有
+
+    //->设置的话是给全局window增加一个叫做num的属性名
+    //    function fn() {
+    //        num = 13;//->num不是私有的,找window,window下也没有,这里的意思相当于 window.num=13;
+    //        console.log(num);//->13
+    //    }
+    //    fn();
+    //    console.log(num);//->13
+
+    //->获取的话会报错
+    //    function fn() {
+    //        console.log(num);//->Uncaught ReferenceError: num is not defined
+    //    }
+    //    fn();
+
+
+    var a = 110;
+    var c;
+
+    function me() {
+        console.log(a);//110
+        var b = 120;
+        var d = 888;
+        console.log(c);//undefined
+        console.log(d);//888
+        console.log(w);//undefined 代码从上到下执行 w只是声明未定义
+    }
+    me();
+    var w="aa";
+    ~function () {
+        console.log(w);//"aa"
+        console.log(a);// 110
+        var b = 120;
+        console.log(c);//undefined
+        console.log(d);//由于闭包机制不能取到me函数体中的 全局作用域下也没有 所以在获取阶段会报错 下面代码都不在执行
+//        d=13;//d不是私有的,找window,window下也没有,这里的意思相当于 window.d=13;设置的话是给全局window增加一个叫做d的属性名
+//        console.log(d);
+    }();
+
+    console.log(c);//
+    console.log(d);
+    console.log(b);//
+    console.log(d);
+</script>
+</body>
+</html>

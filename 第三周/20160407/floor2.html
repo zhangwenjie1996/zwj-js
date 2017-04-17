@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 1210px;
+            margin: auto;
+        }
+
+        #linkTo {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            background: #FFFFFF;
+            display: none;
+            width: 30px;
+        }
+
+        #linkTo li {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div><img src="image/top1.png"></div>
+    <div><img src="image/top2.png"></div>
+    <div><img src="image/top3.png"></div>
+    <div class="main">
+        <div class="floor"><img src="image/floor1.png"></div>
+        <div class="floor"><img src="image/floor2.png"></div>
+        <div class="floor"><img src="image/floor3.png"></div>
+        <div class="floor"><img src="image/floor4.png"></div>
+        <div class="floor"><img src="image/floor5.png"></div>
+        <div class="floor"><img src="image/floor6.png"></div>
+        <div class="floor"><img src="image/floor7.png"></div>
+    </div>
+    <div id="linkTo">
+        <ul>
+            <li a="1f" b="服装">1f</li>
+            <li a="2f" b="服装">2f</li>
+            <li a="3f" b="服装">3f</li>
+            <li a="4f" b="服装">4f</li>
+            <li a="5f" b="服装">5f</li>
+            <li a="6f" b="服装">6f</li>
+            <li a="7f" b="服装">7f</li>
+        </ul>
+    </div>
+    <div style="background: #000;color: #FFFFFF;line-height: 100px;height: 100px;text-align: center;">我是底部啊</div>
+</div>
+<script type="text/javascript" src="js/floor.js" charset="utf-8"></script>
+<script type="text/javascript">
+    ~function () {
+        var linkTo = document.getElementById('linkTo');
+        var clientH = utils.win("clientHeight");
+        var oDivs = document.getElementsByClassName('floor');
+        var oLis = document.getElementsByTagName('li');
+
+        function windowScroll() {
+            var curTop = utils.win("scrollTop");
+            linkTo.style.display = curTop >= clientH ? "block" : "none";
+            for (var i = 0, len = oDiv.length; i < len; i++) {
+                var nowTop = utils.win("scrollTop");
+                var curT = utils.offset(oDiv[i]).top;
+                if (curT <= nowTop + oDiv[i].clientHeight / 2 && nowTop < (oDiv[i].clientHeight / 2 + curT)) {
+                    oLis[i].innerHTML = oLis[i].getAttribute("b");
+                    oLis[i].style.color = 'red';
+                    oLis[i].style.background = '';
+
+                } else {
+                    oLis[i].innerHTML = oLis[i].getAttribute("a");
+                    oLis[i].style.background = '';
+                    oLis[i].style.color = 'black';
+                }
+            }
+
+        }
+
+        window.onscroll = windowScroll;
+
+        function myFunction() {
+            for (var i = 0, len = oLis.length; i < len; i++) {
+                oLis[i].index = i;
+                oLis[i].onclick = function () {
+                    window.onscroll = null;
+                    var _this = this.index;
+                    var nowTop = utils.win("scrollTop");
+                    var curDiv = oDivs[_this];
+                    var target = utils.win("scrollTop"), duration = 100, interval = 10, step = target / duration * interval;
+                    if (utils.offset(curDiv).top < nowTop) {
+                        var timer = window.setInterval(function () {
+                            if (nowTop <= utils.offset(curDiv).top) {
+                                document.documentElement.scrollTop = utils.offset(curDiv).top;
+                                document.body.scrollTop = utils.offset(curDiv).top;
+                                window.clearInterval(timer);
+                                window.onscroll = windowScroll;
+                                return;
+                            }
+                            nowTop -= step;
+                            document.documentElement.scrollTop = nowTop;
+                            document.body.scrollTop = nowTop;
+                        }, 10)
+
+                    } else {
+                        var timer = window.setInterval(function () {
+                            if (nowTop > utils.offset(curDiv).top) {
+                                document.documentElement.scrollTop = utils.offset(curDiv).top;
+                                document.body.scrollTop = utils.offset(curDiv).top;
+                                window.clearInterval(timer);
+                                window.onscroll = windowScroll;
+                                return;
+                            }
+                            nowTop += step;
+                            document.documentElement.scrollTop = nowTop;
+                            document.body.scrollTop = nowTop;
+                        }, 10)
+                    }
+
+                }
+            }
+        }
+
+        myFunction();
+
+        function move() {
+            for (var i = 0, len = oLis.length; i < len; i++) {
+                oLis[i].onmouseover = function () {
+                    this.innerHTML = this.getAttribute("b");
+                    this.style.background = "red";
+                    this.style.color = "white";
+                };
+                oLis[i].onmouseout = function () {
+                    this.innerHTML = this.getAttribute("a");
+                    this.style.background = "";
+                    this.style.color = "black";
+                }
+            }
+        }
+
+        move()
+    }()
+
+</script>
+</body>
+</html>

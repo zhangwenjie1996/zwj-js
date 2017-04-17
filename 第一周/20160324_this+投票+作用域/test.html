@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var a=4;
+    function b(x,y,a) {
+        alert(a); //3
+        arguments[2]=10; //a=10
+        alert(a); //10
+    }
+    a=b(1,2,3);
+    alert(a);//undefined
+</script>
+</body>
+</html>

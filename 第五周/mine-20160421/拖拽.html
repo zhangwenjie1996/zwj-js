@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background: darkgray;
+        }
+
+        #mark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: green;
+            width: 200px;
+            height: 200px;
+            margin: auto;
+        }
+
+    </style>
+</head>
+<body>
+<div id="mark"></div>
+
+<script type="text/javascript" src="js/jquery-1.11.3.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var $mark = $("#mark");
+    //    在js中，通过计算中间位置的top和left值，让当前的盒子居中
+    var winH = document.documentElement.clientHeight || document.body.clientHeight;
+    var winW = document.documentElement.clientWidth || document.body.clientWidth;
+    $mark.css({
+        top: (winH - $mark.outerHeight) / 2,
+        left: (winH - $mark.outerWidth) / 2
+    });
+    $mark.on("mousedown", function (e) {
+//记录鼠标的起始位置和盒子的起始位置
+        $(this).attr({
+            strX: e.clientX,
+            strY: e.clientY,
+            strL: parseFloat($(this).css("left")),
+            strT: parseFloat($(this).css("top"))//通过jQuery的css方法获取到的元素是带单位的
+
+        });
+    }).on("mousemove", function (e) {
+        console.log("ok");
+        //获取鼠标当前的位置减去起始的鼠标位置，计算出鼠标的偏移，当前盒子的最新位置=盒子的起始位置+鼠标的偏移
+        var changeX = e.clientX - $(this).attr("strX");
+        var changeY = e.clientY - $(this).attr("strY");
+        var curL = parseFloat($(this).attr("strL")) + changeX;//在jQuery中通过attr方法获取到的自定义属性的值都是一个字符串格式的，在进行累加的时候，使用字符串拼接而不是数学相加，所以我们还需要在把他转换为数字
+        var curT = parseFloat($(this).attr("strT")) + changeY;
+        $(this).css({
+            top: curT,
+            left: curL
+        })
+    }).on("mouseup", function (e) {
+
+    })
+
+</script>
+</body>
+</html>

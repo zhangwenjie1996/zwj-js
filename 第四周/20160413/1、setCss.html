@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            /* position: absolute;
+             top: 0;
+             left: 0;*/
+            width: 100px;
+            height: 100px;
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+
+<div class="banner w1 w2 w3" id="banner">
+    <div class="bannerInner"></div>
+    <ul class="bannerTip"></ul>
+    <a href="javascript:;" class="bannerLeft"></a>
+    <a href="javascript:;" class="bannerRight"></a>
+</div>
+
+<div class="w1  w2 w3"></div>
+<div class="w1  w3"></div>
+<div class="w1 w2 "></div>
+
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+    var box = document.getElementById("box");
+
+    //    console.log(curLeft);
+    //->在JS中给元素设置样式属性值,我们只能通过curEle.style[attr]=value这种方式给当前元素设置行内样式
+    //    box.style.left = 100 + "px";
+    //    box.style.width = 200 + "px";
+
+    //->setCss:给当前元素的某一个样式属性设置值(增加在行内样式上的)
+//        function setCss(curEle, attr, value) {
+//            //->在JS中设置float样式值的话也需要处理兼容
+//            if (attr === "float") {
+//                curEle["style"]["cssFloat"] = value;
+//                curEle["style"]["styleFloat"] = value;
+//                return;
+//            }
+//
+//            //->如果打算设置的是元素的透明度,我们需要设置两套样式来兼容所有的浏览器
+//            if (attr === "opacity") {
+//                curEle["style"]["opacity"] = value;
+//                curEle["style"]["filter"] = "alpha(opacity=" + value * 100 + ")";
+//                return;
+//            }
+//
+//            //->对于某些样式属性,如果传递进来的值没有加单位,我们需要把单位默认的补充上,这样的话,这个方法就会人性化一些
+//            var reg = /^(width|height|top|bottom|left|right|((margin|padding)(Top|Bottom|Left|Right)?))$/;
+//            if (reg.test(attr)) {
+//                if (!isNaN(value)) {//->在判断传递进来的value值是否是一个有效的数字,如果是有效数字的话,证明当前传递进来的值没有加单位,我们给补充单位
+//                    value += "px";
+//                }
+//            }
+//            curEle["style"][attr] = value;
+//        }
+//
+//        utils.setCss(box, "width", 200);
+//        utils.setCss(box, "backgroundColor", "red");
+//        //utils.setCss(box, "opacity", 0.1);
+//        utils.setCss(box, "float", "right");
+//        utils.setCss(box, "borderTop", "10px solid #000");
+//    //    utils.setCss(box, "padding", "10px 20px 30px 40px");
+//        utils.setCss(box, "padding", 10);
+
+    utils.css(box, {
+        width: 200,
+        backgroundColor: "red",
+        opacity: 0.1,
+        float: "right",
+        padding: 10
+    });
+
+    utils.css(box, "borderTop", "10px solid #000");
+
+
+    //->jQuery中提供了这样的一个方法：css,这个方法既可以实现获取，也可以实现单独的设置，也可以实现批量的设置
+    //    $("#box").css("width");//->获取
+    //    $("#box").css("width",200);//->单独设置
+    //    $("#box").css({
+    //        width:200,
+    //        height:200
+    //    });//->批量设置
+
+
+    //    function children(curEle, tagName) {
+    //        var flag = "getComputedStyle" in window;
+    //        var ary = [];
+    //        if (!flag) {
+    //            var nodeList = curEle.childNodes;
+    //            for (var i = 0, len = nodeList.length; i < len; i++) {
+    //                var curNode = nodeList[i];
+    //                curNode.nodeType === 1 ? ary[ary.length] = curNode : null;
+    //            }
+    //            nodeList = null;
+    //        } else {
+    //            ary = utils.listToArray(curEle.children);
+    //            console.log(ary);
+    //        }
+    //
+    //        if (typeof tagName === "string") {
+    //            for (var k = 0; k < ary.length; k++) {
+    //
+    //                var curEleNode = ary[k];
+    //                console.log(curEleNode);
+    //                if (curEleNode.nodeName.toLowerCase() !== tagName.toLowerCase()) {
+    //                    ary.splice(k, 1);
+    //                    k--;
+    //                }
+    //            }
+    //        }
+    //
+    //        return ary;
+    //    }
+
+    var flag = "getComputedStyle" in window;
+    function hasClass(curEle, className) {
+        var reg = new RegExp("(^| +)" + className + "( +|$)");
+        return reg.test(curEle.className);//new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("w1   w2     w3  ")
+//        false
+//        new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("w1 w2 w3  ")
+//        false
+//        new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("w1 w2 w3")
+//        false
+//        new RegExp("(^| +)" + "w1 w2 w3" + "( +|$)").test("w1 w2 w3")
+//        true
+//        new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("  w1   w2     w3  ")
+//        true
+//        new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("    w1   w2     w3  ")
+//        true
+//        new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("  w1   w2     w3                                     ")
+//        true
+//        new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("     w1    w2                             w3     ")
+//        false
+//        new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("                     w1   w2     w3                       ")
+//        true
+//        new RegExp("(^| +)" + "  w1   w2     w3  " + "( +|$)").test("  w1   w2      w3  ")
+//        false
+    }
+
+    function addClass(curEle, className) {
+        var ary = className.replace(/(^ +| +$)/g, "").split(/ +/g);//"   w4             w5      ".replace(/(^ +| +$)/g,"")
+//        "w4             w5"
+//        "w4             w5".split(" ")
+//                ["w4", "", "", "", "", "", "", "", "", "", "", "", "", "w5"]
+//        "w4             w5".split(/ +/g)
+//                ["w4", "w5"]
+        console.log(ary);
+        for (var i = 0, len = ary.length; i < len; i++) {
+            var curName = ary[i];
+            if (!utils.hasClass(curEle, curName)) {
+                curEle.className += " " + curName;
+            }
+        }
+    }
+
+
+    function removeClass(curEle, className) {
+        var ary = className.replace(/(^ +| +$)/g, "").split(/ +/g);
+        console.log(ary);
+        for (var i = 0, len = ary.length; i < len; i++) {
+            var curName = ary[i];
+            if (utils.hasClass(curEle, curName)) {
+                var reg = new RegExp("(^| +)" + curName + "( +|$)", "g");
+                curEle.className = curEle.className.replace(reg, " ");
+            }
+        }
+    }
+
+
+    function getElementsByClass(strClass, context) {
+        context = context || document;
+        if (flag) {
+            return utils.listToArray(context.getElementsByClassName(strClass));
+        }
+        //->IE6~8
+        var ary = [], strClassAry = strClass.replace(/(^ +| +$)/g, "").split(/ +/g);
+        console.log(strClassAry);
+        var nodeList = context.getElementsByTagName("*");
+        for (var i = 0, len = nodeList.length; i < len; i++) {
+            var curNode = nodeList[i];
+            var isOk = true;
+            for (var k = 0; k < strClassAry.length; k++) {
+                console.log(strClassAry[k]);
+                var reg = new RegExp("(^| +)" + strClassAry[k] + "( +|$)");
+                if (!reg.test(curNode.className)) {
+                    isOk = false;
+                    break;
+                }
+            }
+            if (isOk) {
+                ary[ary.length] = curNode;
+            }
+        }
+        return ary;
+    }
+    getElementsByClass("banner w1");
+    var banner = document.getElementById("banner");
+    //    console.log(children(banner, "ul"));
+    var bannerInner = utils.firstChild(banner);
+    var bannerTip = utils.children(banner, "ul")[0];
+
+    var bannerLink = utils.children(banner, "a");
+    var bannerLeft = bannerLink[0];
+    var bannerRight = bannerLink[1];
+    var divList = bannerInner.getElementsByTagName("div");
+    var imgList = bannerInner.getElementsByTagName("img");
+    var oLis = bannerTip.getElementsByTagName("li");
+    var curLeft = utils.css(box, "width");
+    console.log(hasClass(banner, " w1 w2 w3"))
+    console.log(hasClass(banner, "w1"))
+    console.log(hasClass(banner, "w1"))
+    console.log(addClass(banner, " w4  w5        "))
+    console.log(removeClass(banner, "  w3  w5 "))
+
+    console.log(getElementsByClass("banner w1"))
+
+</script>
+</body>
+</html>

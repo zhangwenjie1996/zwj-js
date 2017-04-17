@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div { color:blue; }
+        div#five { color:red; }
+    </style>
+</head>
+
+<body>
+<div id="one"></div>
+<div id="two"></div>
+<div id="three"></div>
+<div id="four"></div>
+<div id="five"></div>
+<!--例子:———回调函数中 return false时可以退出$.each(), 如果返回一个非false 即会像在for循环中使用continue 一样, 会立即进入下一个遍历-->
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    var arr = [ "one", "two", "three", "four", "five" ];//数组
+    var obj = { one:1, two:2, three:3, four:4, five:5 }; // 对象
+    jQuery.each(arr, function() {  // this 指定值
+        $("#" + this).text("Mine is " + this + ".");  // this指向为数组的值, 如one, two
+        return (this != "three"); // 如果this = three 则退出遍历 ->return false
+    });
+    jQuery.each(obj, function(i, val) {  // i 指向键, val指定值
+        $("#" + i).append(document.createTextNode(" – " + val));
+    });
+    // 输出
+//
+//    Mine is one. – 1
+//    Mine is two. – 2
+//    Mine is three. – 3
+//    - 4
+//    - 5
+</script>
+</body>
+</html>

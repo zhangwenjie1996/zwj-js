@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button>点我</button>
+<div></div>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("button").click(function(){
+            $.ajaxSetup({url:"json/data.json",success:function(result){
+                $("div").html(result.list[1].age);}});
+            $.ajax();
+        });
+    });
+
+</script>
+</body>
+</html>

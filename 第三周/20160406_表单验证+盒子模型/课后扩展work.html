@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/register.css"/>
+</head>
+<body>
+<div class="box">
+    <div class="row1">
+        <div class="form">
+            <label>用户名</label><input id="userName" type="text" placeholder="您的账户名或登录名">
+        </div>
+        <span id="spanName"></span>
+    </div>
+    <div class="row1">
+        <div class="form">
+            <label>邮箱</label><input id="userEmail" type="text" placeholder="您的账户名或登录名">
+        </div>
+        <span id="spanEmail"></span>
+    </div>
+    <div class="row1">
+        <div class="form">
+            <label>手机号码</label><input id="userPhone" type="text" placeholder="建议使用常用手机">
+        </div>
+        <span id="spanPhone"></span>
+    </div>
+    <div class="row1">
+        <div class="form">
+            <label>身份证号码</label><input id="userID" type="text" placeholder="建议至少使用两种字符组合">
+        </div>
+        <span id="spanID"></span>
+        <div class="pd"><em id="judge"></em>
+            <em id="age"></em></div>
+
+    </div>
+    <div class="row1">
+        <div class="form">
+            <label>密码</label><input id="userKey" type="text" placeholder="建议至少使用两种字符组合">
+        </div>
+        <span id="spanKey"></span>
+    </div>
+    <div class="row1">
+        <div class="form">
+            <label>确认密码</label><input id="userSure" type="text" placeholder="建议至少使用两种字符组合">
+        </div>
+        <span id="spanSure"></span>
+    </div>
+
+    <div class="row1">
+        <div class="form">
+            <label>验证码</label><input id="capt" type="text" placeholder="建议至少使用两种字符组合">
+
+            <div id="codeDiv"></div>
+        </div>
+        <span id="spanCapt"></span>
+
+
+    </div>
+</div>
+<script type="text/javascript">
+    var userName = document.getElementById('userName'), spanName = document.getElementById('spanName'),userEmail = document.getElementById('userEmail'), spanEmail = document.getElementById('spanEmail'), userPhone = document.getElementById('userPhone'), spanPhone = document.getElementById('spanPhone'), userKey = document.getElementById('userKey'), spanKey = document.getElementById('spanKey'), userSure = document.getElementById('userSure'), spanSure = document.getElementById('spanSure'), userID = document.getElementById('userID'), spanID = document.getElementById('spanID'), judge = document.getElementById('judge'),age = document.getElementById('age'),capt = document.getElementById('capt'),spanCapt = document.getElementById('spanCapt'),codeDiv = document.getElementById('codeDiv');
+    userName.onfocus = function () {
+        this.parentNode.className = "success";
+        spanName.style.display = "block";
+        spanName.innerHTML = "支持中文、字母、数字、“-”“_”的组合，4-20个字符";
+    };
+    userName.onblur = userName.onkeyup = function () {
+        var val = this.value.replace(/(^ +| +$)/g, ""),reg = /^([a-zA-Z0-9_]|[-]|[\u4e00-\u9fa5]){4,20}$/;
+        if (val.length === 0 || !reg.test(val)) {
+            this.parentNode.className = "error";
+            spanName.style.display = "block";
+            spanName.innerHTML = val.length === 0 ? "不能为空" : "格式错误";
+            return;
+        }
+        this.parentNode.className = "form";
+        spanName.style.display = "none";
+    };
+
+    userEmail.onfocus = function () {
+        this.parentNode.className = "success";
+        spanEmail.style.display = "block";
+        spanEmail.innerHTML = "请再次输入密码";
+    };
+    userEmail.onblur=userEmail.onkeyup = function () {
+        var val = this.value.replace(/(^ +| +$)/g, "");
+        var reg = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+        if (val.length === 0 || !reg.test(val)) {
+            this.parentNode.className = "error";
+            spanEmail.style.display = "block";
+            spanEmail.innerHTML = val.length === 0 ? "不能为空~~" : "您输入的邮箱不符合格式~~";
+            return;
+        }
+        this.parentNode.className = "form";
+        spanEmail.style.display = "none";
+    };
+
+    userPhone.onfocus = function () {
+        this.parentNode.className = "success";
+        spanPhone.style.display = "block";
+        spanPhone.innerHTML = "支持阿拉伯数字11位";
+    };
+    userPhone.onblur = userPhone.onkeyup = function () {
+        var val = userPhone.value, reg = /^1\d{10}$/;
+        if (val.length === 0 || !reg.test(val)) {
+            this.parentNode.className = "error";
+            spanPhone.style.display = "block";
+            spanPhone.innerHTML = val.length === 0 ? "不能为空" : "格式错误";
+            return;
+        }
+        this.parentNode.className = "form";
+        spanPhone.style.display = "none";
+    };
+
+
+    userID.onfocus = function () {
+        this.parentNode.className = "success";
+        spanID.style.display = "block";
+        spanID.innerHTML = "请填写你的身份证";
+        judge.innerHTML='';
+        age.innerHTML='';
+    };
+    userID.onblur = userID.onkeyup = function () {
+        var val = userID.value, reg = /^(?:\d{6})(\d{4})(?:\d{2})(?:\d{2})(?:\d{2})(\d)(?:\d|X)$/;
+        if (val.length === 0 || !reg.test(val)) {
+            this.parentNode.className = "error";
+            spanID.style.display = "block";
+            spanID.innerHTML = val.length === 0 ? "不能为空" : "格式错误";
+            judge.innerHTML='';
+            age.innerHTML='';
+            return;
+        }
+        this.parentNode.className = "form";
+        spanID.style.display = "none";
+        judge.innerHTML = reg.test(val) ? ((reg.exec(val)[2]) % 2 == 0 ? "性别：女" : "性别：男") : null;
+        var time = new Date();
+        var year = time.getFullYear();
+        age.innerHTML=reg.test(val) ? ((year-reg.exec(val)[1])) : null;
+    };
+
+
+    userKey.onfocus = function () {
+        this.parentNode.className = "success";
+        spanKey.style.display = "block";
+        spanKey.innerHTML = "建议使用字母、数字和符号两种及以上的组合，6-20个字符";
+    };
+    userKey.onblur = userKey.onkeyup = function () {
+        var val = userKey.value, reg = /^(\w|-|#|@|\*|\.|&|!|\?|;|:|~|,|%|^|\+){6,20}$/;
+        if (val.length === 0 || !reg.test(val)) {
+            this.parentNode.className = "error";
+            spanKey.style.display = "block";
+            spanKey.innerHTML = val.length === 0 ? "不能为空" : "格式错误";
+            return;
+        }
+        this.parentNode.className = "form";
+        spanKey.style.display = "none";
+    };
+
+
+    userSure.onfocus = function () {
+        this.parentNode.className = "success";
+        spanSure.style.display = "block";
+        spanSure.innerHTML = "请再次输入密码";
+    };
+    userSure.onblur = userSure.onkeyup = function () {
+        if (userKey.value === this.value && this.value.length !== 0) {
+            spanSure.innerHTML = "密码正确";
+            this.parentNode.className = "form";
+        } else {
+            spanSure.innerHTML = "密码输入错误";
+            this.parentNode.className = "error";
+        }
+
+    };
+
+
+    var area = "abcdefghijklmnopqrstuvwxyz" +
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "0123456789";
+
+    function getCode() {
+        var str = "";
+        while (str.length < 4) {//->只要不够四位,就一直从新生成随机数获取
+            var ran = Math.round(Math.random() * 61);
+            var temp = area[ran];
+            //->在每一次往str中拼接的时候,判断str中是否已经存在temp了,如果已经存在就不在拼接了
+            if (str.indexOf(temp) > -1) {
+                continue;
+            }
+            str += temp;
+        }
+        codeDiv.innerHTML = str;
+    }
+    getCode();
+    codeDiv.onclick = getCode;
+    capt.onfocus = function () {
+        this.parentNode.className = "success";
+        spanCapt.style.display = "block";
+        spanCapt.innerHTML = "输入验证码";
+    };
+    capt.onblur = capt.onkeyup = function () {
+        if (codeDiv.innerHTML === this.value && this.value.length!== 0) {
+            spanCapt.innerHTML = "";
+            this.parentNode.className = "form";
+        } else {
+            spanCapt.innerHTML = "验证码入错误";
+            this.parentNode.className = "error";
+        }
+
+    };
+
+</script>
+</body>
+</html>

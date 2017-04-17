@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .container {
+            width: 1210px;
+            margin: auto;
+        }
+
+        #linkTo {
+            position: fixed;
+            top: 50%;
+            left: 30px;
+            width: 30px;
+            display: none;
+            background: white;
+        }
+
+        #linkTo li {
+            text-align: center;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="f01"><img src="image/top1.png"></div>
+    <div class="f02"><img src="image/top2.png"></div>
+    <div class="f03"><img src="image/top3.png"></div>
+    <div id="main">
+        <div class="floor"><img src="image/floor1.png"></div>
+        <div class="floor"><img src="image/floor2.png"></div>
+        <div class="floor"><img src="image/floor3.png"></div>
+        <div class="floor"><img src="image/floor4.png"></div>
+        <div class="floor"><img src="image/floor5.png"></div>
+        <div class="floor"><img src="image/floor6.png"></div>
+        <div class="floor"><img src="image/floor7.png"></div>
+    </div>
+    <div id="linkTo">
+        <ul>
+            <li a="1f" b="服装">1f</li>
+            <li a="2f" b="美妆">2f</li>
+            <li a="3f" b="手机">3f</li>
+            <li a="4f" b="电器">4f</li>
+            <li a="5f" b="数码">5f</li>
+            <li a="6f" b="健身">6f</li>
+            <li a="7f" b="居家">7f</li>
+        </ul>
+    </div>
+    <div style="background: #000;color: #FFFFFF; line-height: 100px;height: 100px;text-align: center">我是底部啊啊啊啊啊啊啊啊啊啊啊啊
+    </div>
+</div>
+<script type="text/javascript" src="js/floor.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    ~function () {
+        var linkTo = document.getElementById('linkTo');
+        var clientH = utils.win("clientHeight");
+        var oLis = linkTo.getElementsByTagName("li");
+        var oDivs = document.getElementsByClassName('floor');
+
+
+        function windowScroll() {
+            var curTop = utils.win("scrollTop");
+            linkTo.style.display = curTop >= clientH ? "block" : "none";
+            for (var i = 0, len = oLis.length; i < len; i++) {
+                var curT = utils.offset(oDivs[i]).top;
+                var nowTop = utils.win("scrollTop");
+                if (curT <= nowTop + oDivs[i].clientHeight / 2 && nowTop < (oDivs[i].clientHeight / 2 + curT)) {
+                    oLis[i].innerHTML = oLis[i].getAttribute("b");
+                    oLis[i].style.color = 'red';
+                    oLis[i].style.background = '';
+
+                } else {
+                    oLis[i].innerHTML = oLis[i].getAttribute("a");
+                    oLis[i].style.background = '';
+                    oLis[i].style.color = 'black';
+                }
+            }
+
+        }
+
+        window.onscroll = windowScroll;
+
+        function myFunction() {
+            for (var i = 0, len = oLis.length; i < len; i++) {
+                oLis[i].index = i;
+                oLis[i].onclick = function () {
+                    window.onscroll = null;
+                    var target = utils.win('scrollTop'), duration = 1000, interval = 10, step = target / duration * interval;
+                    var nowTop = utils.win("scrollTop");
+                    var _this = this.index;
+                    var curDiv = oDivs[_this];
+                    if (nowTop > utils.offset(curDiv).top) {
+                        var timer = window.setInterval(function () {
+                            if (nowTop <= utils.offset(curDiv).top) {
+                                document.documentElement.scrollTop = utils.offset(curDiv).top;
+                                document.body.scrollTop = utils.offset(curDiv).top;
+                                window.clearInterval(timer);
+                                window.onscroll = windowScroll;
+                                return;
+                            }
+                            nowTop = nowTop - step;
+                            document.documentElement.scrollTop = nowTop;
+                            document.body.scrollTop = nowTop;
+
+                        }, 10)
+                    } else {
+                        var timer = window.setInterval(function () {
+                            if (nowTop >= utils.offset(curDiv).top) {
+                                document.documentElement.scrollTop = utils.offset(curDiv).top;
+                                document.body.scrollTop = utils.offset(curDiv).top;
+                                window.clearInterval(timer);
+                                window.onscroll = windowScroll;
+                                return;
+                            }
+                            nowTop = nowTop + step;
+                            document.documentElement.scrollTop = nowTop;
+                            document.body.scrollTop = nowTop;
+
+                        }, 10)
+                    }
+                }
+
+            }
+        }
+
+        myFunction();
+
+        function mouse() {
+            for (var i = 0, len = oLis.length; i < len; i++) {
+                oLis[i].onmouseover = function () {
+
+                    this.innerHTML = this.getAttribute("b");
+                    this.style.background = "red";
+                    this.style.color = "white";
+
+
+                };
+                oLis[i].onmouseout = function () {
+
+                    this.innerHTML = this.getAttribute("a");
+                    this.style.background = "";
+                    this.style.color = "black";
+
+
+                }
+            }
+        }
+
+        mouse();
+    }()
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件委托</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .menu {
+            height: 40px;
+            background: #333;
+        }
+
+        .menu .menuCon {
+            width: 1266px;
+            margin: 0 auto;
+            height: 100%;
+        }
+
+        .menu .menuCon .shop {
+            float: right;
+            background: red;
+            width: 120px;
+            height: 40px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .shopDetail {
+            position: absolute;
+            right: 0;
+            right: -1px \9;
+            top: 40px;
+            z-index: 31;
+            width: 316px;
+            padding: 15px 0 0;
+            color: #424242;
+            background: #fff;
+            border: 1px solid #e0e0e0 \9;
+            border-top: 0 \9;
+            -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <div class="menuCon">
+        <div class="shop">购物车<div class="shopDetail"></div></div>
+    </div>
+</div>
+
+
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.11.3.min.js"></script>
+
+</body>
+</html>

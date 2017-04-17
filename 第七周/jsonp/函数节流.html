@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/underscore.js/1.7.0/underscore-min.js"></script>
+</head>
+<body style="height: 1000px;">
+<script>
+    var t= _.throttle(function () {
+        console.log(1);
+    },500);
+//    var t= _.debounce(function () {
+//        console.log(1);
+//    },500);
+
+    window.onscroll= function () {
+        t();
+    }
+</script>
+</body>
+</html>

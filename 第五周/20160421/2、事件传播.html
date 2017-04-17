@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>独家讲解事件的传播机制</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #ccc;
+            overflow: hidden;
+        }
+
+        div {
+            cursor: pointer;
+        }
+
+        #outer {
+            margin: 50px auto;
+            width: 300px;
+            height: 300px;
+            background: green;
+        }
+
+        #inner {
+            margin: 50px auto;
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+
+        #center {
+            margin: 50px auto;
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+
+        #a {
+            width: 500px;
+            height: 500px;
+            background: yellow;
+        }
+
+        #b {
+            width: 100px;
+            height: 100px;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+<div id="outer">
+<div id="inner">
+<div id="center"></div>
+</div>
+</div>
+
+<!--阻止子元素继承父元素事件（还要注意this与e.target的区别）-->
+<div id="a">
+    <div id="b"></div>
+</div>
+<script type="text/javascript">
+    var outer = document.getElementById("outer"), inner = document.getElementById("inner"), center = document.getElementById("center");
+
+        document.body.onclick = function () {
+            console.log("BODY");
+        };
+
+        outer.onclick = function () {
+            console.log("OUTER");
+        };
+
+        inner.onclick = function () {
+            console.log("INNER");
+        };
+
+        center.onclick = function (e) {
+            console.log("CENTER");
+            e = e || window.event;
+            e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+        };
+
+    //    事件的传播是行为的传播，与绑不绑定方法没关系
+    //1、事件的“冒泡传播”:触发当前元素的某一个行为,那么当前元素所有的父级元素,的相关行为,都会被依次触发(由内到外的)
+    //例如：我点击的是CENTER,CENTER->INNER->OUTER->BODY->HTML->DOCUMENT这条链上的所有元素的点击行为都会被依次触发(我们在项目中一般只需要处理到BODY即可,在不同浏览器中对于HTML/DOCUMENT是否被传播的机制是不一样的)
+
+    //2、阻止事件的冒泡传播
+    //->e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+
+    //3、DOM零级事件绑定只能控制我们的方法在“事件的冒泡传播阶段”发生(把对应的方法执行)
+    //DOM0事件绑定，只能把方法绑定到元素某个事件行为传播的冒泡阶段（换句话说，DOM0绑定的方法只能在冒泡阶段执行）
+    //DOM2事件绑定（在标准浏览器中），我们既可以把方法绑定在捕获阶段也可以把方法绑定在冒泡阶段，在ie6~8下和dom0一样也只能把方法绑定在冒泡阶段
+
+    //4、事件传播的整套机制:捕获阶段->冒泡阶段(捕获阶段->目标阶段->冒泡阶段)
+
+
+    //    ->DOM2
+    //        document.body.addEventListener("click", function () {
+    //            console.log("BODY 冒泡");
+    //        }, false);
+    //
+    //        outer.addEventListener("click", function () {
+    //            console.log("OUTER 捕获");
+    //        }, true);
+    //
+    //        outer.addEventListener("click", function () {
+    //            console.log("OUTER 冒泡");
+    //        }, false);
+    //
+    //        inner.addEventListener("click", function () {
+    //            console.log("INNER 捕获");
+    //        }, true);
+    //
+    //        center.addEventListener("click", function () {
+    //            console.log("CENTER 冒泡");
+    //        }, false);
+
+//
+    a.onclick = function (e) {
+        var aa = e.target;
+        aa.style.background = 'red';
+        console.log(this);//a
+//            console.log(aa);//按a时候a 按b时候b
+    };
+    b.onclick = function (event) {
+        event = event || window.event;
+        event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true;
+        console.log(this);
+    };
+</script>
+</body>
+</html>

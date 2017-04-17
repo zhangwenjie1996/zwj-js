@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul, li, a {
+    list-style: none;
+}
+
+a, a:active, a:target, a:hover, a:visited {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+input {
+    outline: none;
+}
+
+.addBtn {
+    margin: 10px auto;
+    width: 942px;
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    font-size: 18px;
+}
+
+.addBtn:hover {
+    text-decoration: underline;
+    color: green;
+}
+
+.w60 {
+    width: 60px !important;
+}
+
+.w100 {
+    width: 100px !important;
+}
+
+.w280 {
+    width: 280px !important;
+}
+
+.box {
+    width: 900px;
+    overflow: hidden;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #999999;
+    -webkit-box-shadow: 3px 3px 10px 0 #999999;
+    -moz-box-shadow: 3px 3px 10px 0 #999999;
+    box-shadow: 3px 3px 10px 0 #999999;
+}
+
+.box .head {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    font-size: 0;
+    background: #7ba3ff;
+}
+
+.box .head span {
+    font-size: 16px;
+    display: inline-block;
+    width: 200px;
+    height: 100%;
+    text-align: center;
+}
+
+.list li {
+    height: 30px;
+    line-height: 30px;
+    font-size: 0;
+}
+
+.list li span {
+    font-size: 16px;
+    width: 200px;
+    display: inline-block;
+    height: 100%;
+    text-align: center;
+}
+
+.list li span a {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.list li.bg {
+    background: #BED5FF;
+}
+
+.list li.hov {
+    background: #a5c3ff;
+}
+
+/*以下是增加页面的样式*/
+.cusAdd {
+    width: 500px;
+    overflow: hidden;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #999999;
+    -webkit-box-shadow: 3px 3px 10px 0 #999999;
+    -moz-box-shadow: 3px 3px 10px 0 #999999;
+    box-shadow: 3px 3px 10px 0 #999999;
+    /* display: inline-block; */
+    /* text-align: center; */
+}
+
+.cusAdd div {
+    height: 50px;
+    line-height: 50px;
+    font-size: 0;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.cusAdd div span, .cusAdd div input {
+    display: inline-block;
+    vertical-align: middle;
+}
+.cusAdd div span{
+    width: 20%;
+    font-size: 16px;
+}
+.cusAdd div input {
+    height: 28px;
+    line-height: 28px;
+    padding: 0 5px;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+#userAge {
+    width: 100px;
+}
+
+.cusAdd .submit {
+    text-align: center;
+    width: 60%;
+    height: 35px;
+    border: 1px solid green;
+    cursor: pointer;
+    color: #FFFFFF;
+    background: green;
+    line-height: 35px;
+    margin-left: 30%;
+    font-size: 16px;
+    margin-top: 10px;
+}

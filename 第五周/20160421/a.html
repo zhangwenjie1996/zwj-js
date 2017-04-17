@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #e1e1e1;
+            overflow: hidden;
+        }
+
+        #box {
+            min-width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="box"></div>
+
+<script>
+        var ary = ["red", "green", "blue", "black"];
+        ~function () {
+            for (var i = 0; i < ary.length; i++) {
+                box.onclick = (function (i) {
+                    console.log(i);
+                    return function () {
+                        box.style.background = ary[i];
+                    }
+                })(i);
+
+
+            }
+        }();
+
+    //    var i=0;
+    //    box.onclick= function () {
+    //        if(i>=3){
+    //            i=0;
+    //            box.style.background=ary[i];
+    //            return;
+    //        }
+    //        ++i;
+    //        box.style.background=ary[i];
+    //
+    //    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    function A() {
+        this.x = 100;
+    }
+    A.prototype.getX = function () {
+        console.log(this.x);
+    };
+
+    function B() {
+//        this.x = 200;
+//        A.call(this);
+    }
+    B.prototype = new A;
+    var b = new B();
+    console.log(b, b.x)//B()上的 this.x = 200;去掉后，b上什么都没有 {} b要想要x或者getX方法 只能通过原型找（原型继承 B原型上的方法和属性通过new A，建立起了和A的连接 可以用A中的私有和公有方法和属性；原型继承并不是把父类中的属性和方法克隆一份一模一样的给B，只是让B 和A之间增加了原型链的连接，所以b只是可以获取到私有的但并不是自己本身就有的所以不会输出b)通过 A.call(this);获取A上的私有属性 此时因为call是相当于拷贝的所以b上有私有的，b可以输出{x:100}
+
+
+    //    我的误区：认为就算B（）没有私有属性或方法 只要通过的原型上有 照样b对象可以输出来{x:100}  但是这是错的 B()函数里什么都没有 只是B本来的原型上或者继承之后的原型上有的话 b里放的是自己的私有的 所以b还是输不出来 但是b可以通过原型链获取到相应的x或者getX方法，但是本身只是个{}
+
+
+//     原型继承是我们js中最常用的一种继承方式
+//        子类B想要继承父类A中的所有的属性和方法（私有+公有），只需要让B.prototype=new A;即可
+//        原型继承的特点：他是把父类中私有的+公有的都继承到了子类原型上（子类公有的）
+//        核心：原型继承并不是把父类中的属性和方法克隆一份一模一样的给B，而是让B 和A之间增加了原型链的连接，以后B 的实例n想要A中的getx方法，需要一级级的向上查找来使用
+
+</script>
+</body>
+</html>

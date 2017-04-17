@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="div">
+    <span></span><span></span><span></span><span></span>
+
+    <p>
+        <span></span><span></span><span>
+    </span>
+    </p>
+</div>
+<script type="text/javascript">
+    //获取页面中元素的方法
+    // document.getElementById();
+    // context.getElementsByTagName(TAGNAME)->把指定容器中的子子孙孙辈分的所有标签都获取到
+    //context.getElementByClassName()->在ie6~8不兼容
+    //    document.getElementByName()->在ie浏览器只对表单元素的name起作用
+    //document.body
+    //    document.documentElement
+    //    context.querySelector/context.querySelectorAll->在ie6~8不兼容，通过这个获取的节点集合不存在DOM映射
+    //    ->描述节点和节点之间关系的属性(在标准浏览器中会把空格和换行当做文本节点处理)
+    //    childNodes
+    //    children->在ie6~8下获取的结果和标准浏览器获取的结果不一致
+    //    parentNode
+    //    previousSibling/previousElementSibling
+    //    nextSibling/nextElementSibling
+    //    lastChild/lastElementChild
+    //    firstChild/firstElementChild
+
+    //    DOM的增删改
+    //    createElement
+    //    document.createDocumentFragment()
+    //    appendChild
+    //    insertBefore
+    //    cloneNode(true / false)
+    //    replaceChild
+    //    removeChild
+    //    get/set/removeAttribute
+
+    //    DOM盒子模型
+
+    var oDiv = document.getElementById("div");
+    //    接下来写的所有方法z jQuery的作用和方法名一模一样
+    //    function children ->获取某一个容器中所有的元素子节点（还可以筛选出指定标签名的）
+    //    getElementByClass->通过元素的样式类名获取一组元素（兼容所有的浏览器）（jQuery没有这个方法名，但是JQUERY的一部分选择器也是基于这个方法的原理来实现的）
+    //    获取上一个哥哥元素节点（prev）,获取下一个弟弟元素节点（next），获取所有哥哥元素节点（prevAll）,获取所有弟弟元素节点（nextAll），获取相邻的两个元素节点（sibling）,获取所有的兄弟元素节点（sibling）
+    //    获取第一个
+
+
+</script>
+</body>
+</html>

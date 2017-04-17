@@ -1,0 +1,666 @@
+
+body,html{
+    width:100%;
+    height:100%;
+    margin:0;
+    display:table;
+    text-align:center;
+}
+.music1
+{
+    display:none;
+}
+
+.warp{
+    margin-top:100px;
+    vertical-align:middle;
+    position:relative;
+}
+
+.backgroud_circle{
+    width:400px;
+    height:400px;
+    border-radius:100%;
+    background:#6699FF;
+    margin:0 auto;
+    overflow:hidden;
+    -webkit-mask-image: -webkit-radial-gradient(#BADA55, #BADA55);
+    -moz-mask-image: -webkit-radial-gradient(#BADA55, #BADA55);
+    -o-mask-image: -webkit-radial-gradient(#BADA55, #BADA55);
+    -ms-mask-image: -webkit-radial-gradient(#BADA55, #BADA55);
+    /*执行动画*/
+    animation:grow 0.7s ease;
+    -webkit-animation:grow 0.7s ease;
+    transform-origin:center;
+}
+
+/*身体body*/
+.body{
+    width:285px;
+    height:400px;
+    margin:0 auto;
+    background:#333333;
+    position:relative;
+    top:100px;
+    border-radius:100px;
+    /*执行动画*/
+    -webkit-animation:body-enter 0.7s 0.2s 1 ease;
+    animation:body-enter 0.7s 0.2s 1 ease;
+    /*-webkit-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;*/
+}
+
+/*头部head*/
+.head{
+    width:196px;
+    height:260px;
+    border-radius:50px;
+    background:#ffe4be;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-210px;
+    margin-left:-98px;
+    /*动画执行*/
+    animation:grow 0.7s 0.5s ease;
+    -webkit-animation:grow 0.7s 0.5s ease;
+    transform-origin:bottom;
+}
+
+/*头发*/
+.hair-main
+{
+    width:220px;
+    height:0px;
+    background:#FF9966;
+    border-radius:54px 54px 0px 0px;
+    animation:hair-main 0.7s 0.9s ease;
+    -webkit-animation:hair-main 0.7s 0.9s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+    position:relative;
+    margin-left:-12px;
+    margin-top:-10px;
+    z-index:2;
+}
+
+/*鬓角*/
+.sideburn
+{
+    width:8px;
+    height:25px;
+    background:#FF9966;
+    opacity:0;
+    bottom:-25px;
+    position:absolute;
+    animation:sideburn-main 0.7s 1s ease;
+    -webkit-animation:sideburn-main 0.7s 1s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+}
+.sideburn#left
+{
+    left:12px;
+}
+.sideburn#right
+{
+    right:12px;
+}
+
+/*耳朵*/
+.ear
+{
+    width:24px;
+    height:35px;
+    position:absolute;
+    background:#ffe4be;
+    top:116px;
+    border-radius:12px;
+    animation:grow 0.7s 1.3s ease;
+    -webkit-animation:grow 0.7s 1.3s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+    transform:scale(0);
+    -webkit-transform:scale(0);
+}
+.ear#left
+{
+    left:-12px;
+}
+.ear#right
+{
+    right:-12px;
+}
+
+/*脸部*/
+.face
+{
+    width:180px;
+    height:0px;
+    border-radius:48px;
+    background:#ffe4be;
+    position:absolute;
+    top:40px;
+    left:8px;
+    animation:hair-main 0.7s 0.5s linear;
+    -webkit-animation:hair-main 0.7s 0.5s linear;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+    z-index:3;
+}
+
+/*鼻子*/
+.nose
+{
+    width:20px;
+    height:45px;
+    opacity:1;
+    border-top-left-radius:20px;
+    background:#ffe4be;
+    position:absolute;
+    top:80px;
+    left:50%;
+    margin-left:-20px;
+    animation:shadow-main 0.7s 3s ease;
+    animation-fill-mode: forwards;
+    -webkit-animation:shadow-main 0.7s 3s ease;
+    -webkit-animation-fill-mode: forwards;
+    opacity:0;
+    z-index:5;
+}
+
+/*形成鼻子的阴影*/
+.shadow-main
+{
+    width:98px;
+    height:260px;
+    position:absolute;
+    bottom:-84px;
+    left:-8px;
+    z-index:4;
+    overflow:hidden;
+}
+.shadow
+{
+    width:98px;
+    height:260px;
+    border-radius:50px;
+    background:rgba(149,36,0,0.1);
+    position:absolute;
+    opacity:0;
+    z-index:4;
+    animation:shadow-main 1s 2.8s ease;
+    -webkit-animation:shadow-main 1s 2.8s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+}
+
+/*眼睛阴影*/
+.eye-shadow
+{
+    width:30px;
+    height:15px;
+    border-radius:0 0 15px 15px;
+    background:rgba(149,36,0,0.1);
+    position:absolute;
+    top:70px;
+    animation:grow 0.7s 2s ease;
+    -webkit-animation:grow 0.7s 2s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+    transform:scale(0);
+    -webkit-transform:scale(0);
+}
+.eye-shadow#left
+{
+    left:35px;
+    z-index:5;
+}
+.eye-shadow#right
+{
+    right:35px;
+}
+
+/*眼眉*/
+.eyebrow
+{
+    width:40px;
+    height:10px;
+    background:#FF9966;
+    position:absolute;
+    top:-35px;
+    left:50%;
+    opacity:0;
+    margin-left:-20px;
+    -webkit-backface-visibility:hidden;/*设定元素的背面是否可见*/
+}
+.eyebrow#left
+{
+    animation:eyebrow-left 0.7s 2.2s ease;
+    -webkit-animation:eyebrow-left 0.7s 2.2s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+}
+.eyebrow#right
+{
+    animation:eyebrow-right 0.7s 2.2s ease, eyebrow-right-raise 2s 6.6s infinite alternate ease-in-out;
+    -webkit-animation:eyebrow-right 0.7s 2.2s ease, eyebrow-right-raise 2s 6.6s infinite alternate ease-in-out;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+}
+
+/*两只蓝色眼睛*/
+.eye
+{
+    width:20px;
+    height:28px;
+    border-radius:10px;
+    background:#334C68;
+    position:absolute;
+    top:-18px;
+    left:50%;
+    margin-left:-10px;
+    animation:grow 0.7s 2.2s ease;
+    -webkit-animation:grow 0.7s 2.2s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+    transform:scale(0);
+    -webkit-transform:scale(0);
+    transform-origin:bottom;
+    -webkit-transform-origin:bottom;
+}
+
+/*嘴巴*/
+.mouse
+{
+    width:66px;
+    height:33px;
+    background:#FFFFFF;
+    border-radius:0 0 33px 33px;
+    position:absolute;
+    left:50%;
+    top:150px;
+    margin-left:-33px;
+    animation:grow 0.7s 2.6s ease;
+    -webkit-animation:grow 0.7s 2.6s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+    transform:scale(0);
+    -webkit-transform:scale(0);
+}
+
+/*背景高亮light阴影*/
+.tight-light
+{
+    width:400px;
+    height:600px;
+    background:#ffffff;
+    opacity:0;
+    position:absolute;
+    right:15%;
+    animation:tight-light 1s 2.8s ease;
+    -webkit-animation:tight-light 1s 2.8s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+    transform:translate(200px,0px);
+    -webkit-transform:translate(200px,0px);
+}
+
+/*背景高亮dark阴影*/
+.tight-dark
+{
+    width:400px;
+    height:600px;
+    background:#000000;
+    opacity:0;
+    position:absolute;
+    left:10%;
+    top:35px;
+    animation:tight-dark 1s 2.8s ease;
+    -webkit-animation:tight-dark 1s 2.8s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+    transform:translate(-200px,0px);
+    -webkit-transform:translate(-200px,0px);
+    z-index:6;
+}
+
+/*外边黄色圈*/
+.border_circle
+{
+    width:399px;
+    height:399px;
+    border-radius:50%;
+    border:10px solid #ff8345;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-220px;
+    margin-top:-220px;
+    transform:scale(0);
+    -webkit-transform:scale(0);
+    transform-origin:center;
+    -webkit-transform-origin:center;
+}
+/*外边黄色圈one*/
+.border_circle#one
+{
+    animation:border_circle 1s 3.1s ease;
+    -webkit-animation:border_circle 1s 3.1s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+}
+/*外边黄色圈two*/
+.border_circle#two
+{
+    animation:border_circle 1s 3.3s ease;
+    -webkit-animation:border_circle 1s 3.3s ease;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+}
+
+/*I YOU*/
+.backgroud_circle  .shirt-text
+{
+    font-family:"微软雅黑",sans-serif;
+    font-size:50px;
+    font-weight:700;
+    color:#FFFFFF;
+    position:relative;
+    top:180px;
+    display:inline-block;
+    -webkit-text-stroke:2px;
+    text-stroke:2px;
+    opacity:0;
+    -webkit-transform:translate(0px,100px);
+    transform:translate(0px,100px);
+    animation-fill-mode:forwards !important;
+    -webkit-animation-fill-mode:forwards !important;
+    z-index:5;
+}
+.backgroud_circle .shirt-text:nth-of-type(1)
+{
+    animation:shirt-text 0.7s 3.3s ease;
+    -webkit-animation:shirt-text 0.7s 3.3s ease;
+}
+.backgroud_circle .shirt-text:nth-of-type(2)
+{
+    color:#FF0000;
+    animation:shirt-text 0.7s 3.4s ease, heart 2s 4s infinite ease-in-out;
+    -webkit-animation:shirt-text 0.7s 3.4s ease, heart 2s 4s infinite ease-in-out;
+}
+.backgroud_circle .shirt-text:nth-of-type(3)
+{
+    animation:shirt-text 0.7s 3.5s ease;
+    -webkit-animation:shirt-text 0.7s 3.5s ease;
+}
+.backgroud_circle .shirt-text:nth-of-type(4)
+{
+    animation:shirt-text 0.7s 3.6s ease;
+    -webkit-animation:shirt-text 0.7s 3.6s ease;
+}
+.backgroud_circle .shirt-text:nth-of-type(5)
+{
+    animation:shirt-text 0.7s 3.7s ease;
+    -webkit-animation:shirt-text 0.7s 3.7s ease;
+}
+
+/*音符*/
+.music
+{
+    position: absolute;
+    font-size: 150px;
+    color: #FCB040;
+    width: 1px;
+    left: 50%;
+    opacity: 0;
+}
+.music#one
+{
+    margin-left:-250px;
+    top:50%;
+    animation: note 2s 3.5s infinite ease;
+    animation-fill-mode: forwards;
+    -webkit-animation: note 2s 3.5s infinite ease;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.music#two{
+    margin-left: 150px;
+    top: 30%;
+    animation: note 2s 4.3s infinite ease;
+    animation-fill-mode: forwards;
+    -webkit-animation: note 2s 4.3s infinite ease;
+    -webkit-animation-fill-mode: forwards;
+}
+
+
+/*背景圆圈的动画事件：由中心向外扩张*/
+@-webkit-keyframes grow
+{
+    0%{ -webkit-transform:scale(0); transform:scale(0);}
+    60%{ -webkit-transform:scale(1.15); transform:scale(1.15);}
+    80%{ -webkit-transform:scale(0.95); transform:scale(0.95);}
+    100%{ -webkit-transform:scale(1); transform:scale(1);}
+}
+@keyframes grow
+{
+    0%{ -webkit-transform:scale(0); transform:scale(0);}
+    60%{ -webkit-transform:scale(1.15); transform:scale(1.15);}
+    80%{ -webkit-transform:scale(0.95); transform:scale(0.95);}
+    100%{ -webkit-transform:scale(1); transform:scale(1);}
+}
+
+/*身体进入样式：由底部向上先变大再恢复正常*/
+@-webkit-keyframes body-enter
+{
+    0%{-webkit-transform:translateY(200px);}
+    60%{-webkit-transform:translateY(-20px);}
+    80%{-webkit-transform:translateY(30px);}
+    100%{-webkit-transform:translateY(0);}
+}
+@keyframes body-enter
+{
+    0%{-webkit-transform:translateY(200px);}
+    60%{-webkit-transform:translateY(-20px);}
+    80%{-webkit-transform:translateY(30px);}
+    100%{-webkit-transform:translateY(0);}
+}
+
+/*头发动画：*/
+@-webkit-keyframes hair-main
+{
+    0%{height:0px; -webkit-transform:translateY(137px); transform:translateY(137px);}
+    100%{height:137px; -webkit-transform:translateY(0); transform:translateY(0);}
+}
+@keyframes hair-main
+{
+    0%{height:0px; -webkit-transform:translateY(137px); transform:translateY(137px);}
+    100%{height:137px; -webkit-transform:translateY(0); transform:translateY(0);}
+}
+
+/*鬓角动画*/
+@-webkit-keyframes sideburn-main
+{
+    0%{opacity:0; -webkit-transform:translateY(-25px); transform:translateY(-25px);}
+    100%{opacity:1; -webkit-transform:translateY(0); transform:translateY(0);}
+}
+@keyframes sideburn-main
+{
+    0%{opacity:0; -webkit-transform:translateY(-25px); transform:translateY(-25px);}
+    100%{opacity:1; -webkit-transform:translateY(0); transform:translateY(0);}
+}
+
+/*鼻子阴影动画：*/
+@-webkit-keyframes shadow-main
+{
+    0%{ opacity:0; -webkit-transform:translate(98px,0px); transform:translate(98px,0px);}
+    50%{ opacity:0;}
+    100%{ opacity:1; -webkit-transform:translate(0px,0px); transform:translate(0px,0px);}
+}
+@keyframes shadow-main
+{
+    0%{ opacity:0; -webkit-transform:translate(98px,0px); transform:translate(98px,0px);}
+    50%{ opacity:0;}
+    100%{ opacity:1; -webkit-transform:translate(0px,0px); transform:translate(0px,0px);}
+}
+
+/*左眼眉动画*/
+@-webkit-keyframes eyebrow-left
+{
+    0%{opacity:0; -webkit-transform:translateY(-25px); transform:translateY(-25px);}
+    70%{opacity:1; -webkit-transform:translateY(5px); transform:translateY(5px);}
+    100%{opacity:1; -webkit-transform:translateY(0); transform:translateY(0);}
+}
+@keyframes eyebrow-left
+{
+    0%{opacity:0; -webkit-transform:translateY(-25px); transform:translateY(-25px);}
+    70%{opacity:1; -webkit-transform:translateY(5px); transform:translateY(5px);}
+    100%{opacity:1; -webkit-transform:translateY(0); transform:translateY(0);}
+}
+
+/*右眼眉动画*/
+@-webkit-keyframes eyebrow-right
+{
+    0%{opacity:0; -webkit-transform:translateY(-25px); transform:translateY(-25px);}
+    70%{opacity:1; -webkit-transform:translateY(5px); transform:translateY(5px);}
+    100%{opacity:1; -webkit-transform:rotate(9deg) translateY(0); transform:rotate(9deg) translateY(0);}
+}
+@keyframes eyebrow-right
+{
+    0%{opacity:0; -webkit-transform:translateY(-25px); transform:translateY(-25px);}
+    70%{opacity:1; -webkit-transform:translateY(5px); transform:translateY(5px);}
+    100%{opacity:1; -webkit-transform:rotate(9deg) translateY(0); transform:rotate(9deg) translateY(0);}
+}
+
+/*眉毛上升动画*/
+@-webkit-keyframes eyebrow-right-raise
+{
+    0%{top:-35px;}
+    70%{top:-35px;}
+    100%{top:-45px;}
+}
+@keyframes eyebrow-right-raise
+{
+    0%{top:-35px;}
+    70%{top:-35px;}
+    100%{top:-45px;}
+}
+
+/*背景高亮light动画*/
+@-webkit-keyframes tight-light
+{
+    0%{opacity:0; -webkit-transform:translate(200px,0px); transform:translate(200px,0px);}
+    100%{opacity:0.2; -webkit-transform:rotate(45deg) translate(0px,0px); transform:rotate(45deg) translate(0px,0px);}
+}
+@keyframes tight-light
+{
+    0%{opacity:0; -webkit-transform:translate(200px,0px); transform:translate(200px,0px);}
+    100%{opacity:0.2; -webkit-transform:rotate(45deg) translate(0px,0px); transform:rotate(45deg) translate(0px,0px);}
+}
+
+/*背景高亮dark动画*/
+@-webkit-keyframes tight-dark
+{
+    0%{opacity:0; -webkit-transform:translate(-200px,0px); transform:translate(-200px,0px);}
+    100%{opacity:0.2; -webkit-transform:rotate(-45deg) translate(0px,0px); transform:rotate(-45deg) translate(0px,0px);}
+}
+@keyframes tight-dark
+{
+    0%{opacity:0; -webkit-transform:translate(-200px,0px); transform:translate(-200px,0px);}
+    100%{opacity:0.2; -webkit-transform:rotate(-45deg) translate(0px,0px); transform:rotate(-45deg) translate(0px,0px);}
+}
+
+/*外面黄色圈动画*/
+@-webkit-keyframes border_circle
+{
+    0%{ border-width:20px; transform:scale(0); -webkit-transform:scale(0);}
+    40%{ border-width:20px; transform:scale(1); -webkit-transform:scale(1); margin-left:-220px; margin-top:-220px;}
+    100%{ border-width:0px; transform:scale(1.5); -webkit-transform:scale(1.5); border-style:double; margin-left:-200px; margin-top:-200px;}
+}
+@keyframes border_circle
+{
+    0%{ border-width:20px; transform:scale(0); -webkit-transform:scale(0);}
+    40%{ border-width:20px; transform:scale(1); -webkit-transform:scale(1); margin-left:-220px; margin-top:-220px;}
+    100%{ border-width:0px; transform:scale(1.5); -webkit-transform:scale(1.5); border-style:double; margin-left:-200px; margin-top:-200px;}
+}
+
+/*文字*/
+@-webkit-keyframes shirt-text
+{
+    0%{opacity:0; -webkit-transform:translate(0px, 80px); transform:translate(0px, 80px);}
+    60%{opacity:1; -webkit-transform:translate(0px, -50px); transform:translate(0px, -50px);}
+    80%{opacity:1; -webkit-transform:translate(0px, 140px); transform:translate(0px, 140px);}
+    100%{opacity:1; -webkit-transform:translate(0px, 100px); transform:translate(0px, 100px);}
+}
+@keyframes shirt-text
+{
+    0%{opacity:0; -webkit-transform:translate(0px, 80px); transform:translate(0px, 80px);}
+    60%{opacity:1; -webkit-transform:translate(0px, -50px); transform:translate(0px, -50px);}
+    80%{opacity:1; -webkit-transform:translate(0px, 140px); transform:translate(0px, 140px);}
+    100%{opacity:1; -webkit-transform:translate(0px, 100px); transform:translate(0px, 100px);}
+}
+@-webkit-keyframes heart
+{
+    0%{ }
+    30%{color:#00FF99;}
+    70%{color:#FFFF00;}
+    100%{}
+}
+@keyframes heart
+{
+    0%{ }
+    30%{color:#00FF99;}
+    70%{color:#FFFF00;}
+    100%{}
+}
+
+/*音符*/
+@-webkit-keyframes note
+{
+    0% {
+        opacity: 0;
+        -webkit-transform: translate(0px,50px);
+        transform: translate(0px,50px);
+    }
+    30% {
+        -webkit-transform:rotate(12deg) translate(-30px,0px);
+        transform:rotate(12deg) translate(-30px,0px);
+    }
+    45% {
+        opacity: 1;
+    }
+    60% {
+        -webkit-transform: rotate(-12deg) translate(30px,-100px);
+        transform:rotate(-12deg) translate(30px,-100px);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform:rotate(0deg) translate(0px,-200px);
+        transform:rotate(0deg) translate(0px,-200px);
+    }
+}
+@keyframes note
+{
+    0% {
+        opacity: 0;
+        -webkit-transform: translate(0px,50px);
+        transform: translate(0px,50px);
+    }
+    30% {
+        -webkit-transform:rotate(12deg) translate(-30px,0px);
+        transform:rotate(12deg) translate(-30px,0px);
+    }
+    45% {
+        opacity: 1;
+    }
+    60% {
+        -webkit-transform: rotate(-12deg) translate(30px,-100px);
+        transform:rotate(-12deg) translate(30px,-100px);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform:rotate(0deg) translate(0px,-200px);
+        transform:rotate(0deg) translate(0px,-200px);
+    }
+}

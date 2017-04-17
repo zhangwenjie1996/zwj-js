@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', 'json/data.json', true, 'username', 'pwd');
+    //    xhr.setRequestHeader('zwj', '123');
+    //    xhr.setRequestHeader('zwj2', 'a');
+    //    xhr.setRequestHeader('zwj2', 'b');
+    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');//请求主体变成了Form Data ,模拟表单提交
+    xhr.overrideMimeType('text/plain');//重写服务器响应回来的mime类型
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+
+                var response = xhr.responseText;
+                document.write(response);
+                var responseHeaders = xhr.getAllResponseHeaders();
+                console.log(responseHeaders);
+                var responseHeader = xhr.getResponseHeader('content-type');
+                console.log(responseHeader);
+            }
+        }
+    };
+
+    xhr.send("a=1&b=2");
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/banner.css">
+</head>
+<body>
+<div class="banner" id="bannerFir">
+    <div class="bannerInner">
+    </div>
+    <ul class="bannerTip">
+    </ul>
+    <a href="javascript:;" class="bannerLeft"></a>
+    <a href="javascript:;" class="bannerRight"></a>
+</div>
+
+<div class="banner" id="bannerTwo">
+    <div class="bannerInner">
+    </div>
+    <ul class="bannerTip">
+    </ul>
+    <a href="javascript:;" class="bannerLeft"></a>
+    <a href="javascript:;" class="bannerRight"></a>
+</div>
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/banner-封装3.js"></script>
+<script>
+    // 1)  $().banner(bannerFir, "json/banner.txt", 3000);
+    // $().banner(bannerTwo, "json/banner.txt", 1000);
+    //2) $().banner("bannerFir", "json/banner.txt", 3000);
+    //    $().banner("bannerTwo", "json/banner.txt", 1000);
+    // 3)
+    $("#bannerFir").banner("json/banner.txt", 3000);
+    $("#bannerTwo").banner("json/banner.txt", 1000);
+    //    $()实例
+</script>
+</body>
+</html>

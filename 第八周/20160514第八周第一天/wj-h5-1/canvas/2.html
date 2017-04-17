@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8";>
+    <title>练习一个小人的动画</title>
+    <link rel="stylesheet" href="css/people.css" />
+</head>
+
+<body>
+<div class="music1">
+    <audio src="/CSS3/music.mp3" autoplay loop/>
+</div>
+
+<!--整体的div布局-->
+<div class="warp">
+    <div class="border_circle" id="one"></div>
+    <div class="border_circle" id="two"></div>
+    <!--背景圆圈-->
+    <div class="backgroud_circle">
+        <div class="tight-light"></div>
+        <span class="shirt-text">I</span>
+        <span class="shirt-text">♥</span>
+        <span class="shirt-text">Y</span>
+        <span class="shirt-text">O</span>
+        <span class="shirt-text">U</span>
+        <div class="tight-dark"></div>
+        <!--身体-->
+        <div class="body"></div>
+    </div>
+
+    <!--头部-->
+    <div class="head">
+        <!--耳朵-->
+        <div class="ear" id="left"></div>
+        <div class="ear" id="right"></div>
+        <!--头发-->
+        <div class="hair-main">
+            <div class="sideburn" id="left"></div>
+            <div class="sideburn" id="right"></div>
+            <div class="hair-top"></div>
+        </div>
+        <!--脸-->
+        <div class="face">
+            <div class="hair-bottom"></div>
+            <div class="nose"></div>
+            <!--形成鼻子的阴影-->
+            <div class="shadow-main">
+                <div class="shadow"></div>
+            </div>
+            <!--左眼-->
+            <div class="eye-shadow" id="left">
+                <div class="eyebrow" id="left"></div>
+                <div class="eye"></div>
+            </div>
+            <!--右眼-->
+            <div class="eye-shadow" id="right">
+                <div class="eyebrow" id="right"></div>
+                <div class="eye"></div>
+            </div>
+            <!--嘴巴-->
+            <div class="mouse"></div>
+        </div>
+    </div>
+
+    <!--音符-->
+    <span class="music" id="one">&#9835;</span>
+    <span class="music" id="two">&#9834;</span>
+</div>
+</body>
+</html>
+
+
+

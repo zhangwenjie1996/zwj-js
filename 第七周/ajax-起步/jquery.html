@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+    var ready = function (callback) {
+        if (window.addEventListener) {
+            window.addEventListener('DOMContentLoaded', function () {
+                callback()
+            }, false);
+        } else {
+            document.attachEvent('onreadystatechange', function () {
+                if (document.readyState == 'interactive' || document.readyState == 'loading') {
+                    callback();
+                }
+            })
+        }
+    };
+//    window.onload = function () {
+//        console.timeEnd('a')
+//    };
+//    ready(function () {
+//        console.time('a')
+//    });
+    ready(function () {
+        $.ajax({
+            method:'get',
+            url:'json/data.json',
+            cache:false,
+            data:"a=b&c=d",
+            dataType:'json'
+        }).done(function (data) {
+            console.log(data);
+            return $.ajax({
+                method:'get',
+                url:'json/data2.json',
+                cache:false,
+                dataType:'json'
+            }).done(function (data2) {
+                console.log(data2);
+            })
+        })
+    })
+</script>
+
+
+</body>
+</html>

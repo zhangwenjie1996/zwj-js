@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--<script type="text/javascript" src="js/utils.js"></script>-->
+<script type="text/javascript">
+    //->借用数组的slice将arguments转换为数组兼容所有的浏览器的
+    //    function fn() {
+    //        var ary = Array.prototype.slice.call(arguments, 0);
+    //        console.log(ary);
+    //    }
+    //    fn(100,200,300);
+
+    //->借用数组的slice将HTMLCollection/NodeList转换为数组 ->在IE6~8中报错了:Array.prototype.slice: 'this' 不是 JavaScript 对象
+    //    var eleList = document.getElementsByTagName("*");
+    //    var ary = Array.prototype.slice.call(eleList, 0);
+    //    console.log(Object.prototype.toString.call(ary));
+    //->使用try、catch捕获错误信息来处理兼容
+    //    var ary = [];
+    //    try {
+    //        ary = Array.prototype.slice.call(eleList, 0);
+    //    } catch (e) {
+    //        for (var i = 0, len = eleList.length; i < len; i++) {
+    //            ary[ary.length] = eleList[i];
+    //        }
+    //    }
+    //    console.log(ary);
+
+    //    console.log(utils.listToArray(eleList));//Uncaught Error: 参数不合法~~
+
+
+    //http://www.webhek.com/javascript-foreach-call   http://codego.net/572393/
+    //foreach不兼容ie8及以下
+    //函数执行.前面是谁 this是谁
+    //我们可以访问 this 对象，也就是 [1,2,3] ，可以看出，这个 this 是个数组。循环里面的item是this中的每个当前项
+    [1, 2, 3].forEach(function (item, i, arr) {
+        console.log(i + ": " + item, arr);
+    });
+    //call将forEach中的this [1, 2, 3]改变成了["a", "b", "c"]，所以以后的item是["a", "b", "c"]this中的每一项
+    [1, 2, 3].forEach.call(["a", "b", "c"], function (item, i, arr) {
+        console.log(i + ": " + item, arr);
+    });
+
+    //    因此， [].forEach.call() 是一种快速的方法访问 forEach ，并将空数组的 this 换成想要遍历的list。
+    [].forEach.call(["a", "b", "c"], function (item, i, arr) {
+        console.log(i + ": " + item, arr);
+    });
+
+
+    [].forEach(function (item, i, arr) {
+        console.log(i + ": " + item, arr);
+    });
+    //[]数组 执行不了
+
+
+    //    function forEach( list, callback ) {
+    //        Array.prototype.forEach.call( list, callback );
+    //    }
+    //    现在你可以调用，而不是和晦涩的代码这个函数：
+    //    forEach( document.querySelectorAll('a'), function( el ) {
+    //        // whatever with the current node
+    //    });
+
+</script>
+</body>
+</html>

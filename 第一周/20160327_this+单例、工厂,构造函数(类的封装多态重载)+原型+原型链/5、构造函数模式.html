@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    function CreateJsPerson(name, age) {
+        //->当执行的时候,首先还会像普通的函数执行一样,形成一个私有的作用域,形参赋值,预解释,代码开始自上而下执行
+        //->如果是new执行的,在这里代码执行之前又多加了一步浏览器默认的操作：浏览器默认的创建一个对象数据类型的值（就是当前这个类的实例）
+        //->代码执行:
+        //->把默认创建的实例当做执行的主体(this),通过this.xxx=xxx的方式给当前实例增加一些属性和方法
+        this.name = name;
+        this.age = age;
+        this.writeJs = function () {
+            console.log("my name is " + this.name + "，i am " + this.age + " years old，i can write javascript 啦~~");
+        };
+        //->我们不需要手动的写return,浏览器会默认的把当前创建的实例返回
+    }
+
+    //var jsPerson1 = createJsPerson("宫之晓", 40);//->普通函数执行
+    var jsPerson1 = new CreateJsPerson("宫之晓", 40);//->构造函数模式执行 此时的CreateJsPerson就不在仅仅是一个普通的方法名了，而是一个类；同理,jsPerson1就不单单是一个变量了，而是这个类的一个实例;
+    console.log(jsPerson1);
+    console.log(jsPerson1.hasOwnProperty("writeJs"));
+    console.log(jsPerson1.writeJs);
+    jsPerson1.writeJs();
+    var jsPerson2 = new CreateJsPerson("霍月林", 17);
+    jsPerson2.writeJs();
+
+    //->社会上很多后台转前端的大部分都认为，我们写的构造函数模式才是单例模式，但是在前端我们第一种写法才是单例模式，和后台是不一样的
+    //->我们那个为啥也说是单例模式呢?因为不管是obj1,还是obj2都是Object这个基类的两个不同的实例,obj1和obj2也是单独的个体,所以它是“单例模式”;
+
+
+    var obj1 = {};//->字面量方式创建  var obj1=new Object(); 构造函数模式创建(实例创建)
+    var obj2 = {};//->字面量方式创建  var obj2=new Object();
+    //       创建对象的两种等价的方法：
+    //        1.使用字面量方法创建对象：var oschina={goes:"far"};
+    //        2.使用内置构造函数创建对象：var oschina=new Object(); car.goes="far"。
+    //        我们应该尽量使用字面量创建对象，其显著优点在于它仅仅输入更短的字符。但是选择它还有以下几个更重要的原因：
+    //        1.选择字面量法创建对象强调该对象仅是一个可变的hash映射，而不是从对象中提取的属性或方法。
+    //        2.对使用Object构造函数相比，使用字面量在于它并没有作用域解析。因为可能以同样的名字创建一个局部函数，解释器需要从调用Object为0的位置开始一直向上查询作用域链，直到发现全局Object构造函数。
+    //        3.构造函数Object可以仅接收一个参数，并且还依赖传递的值，该Object()可能会委派另一个内置函数来创建对象，并且返回了一个并非期望的不同对象。如将数字、字符串、布尔值当做参数传递给Object构造函数，其结果是获得了以不同构造函数所创建的对象，例如：var oschina=new Object(1); oschina.constructor为Number；传递的值是动态的，知道运行时才确定其类型，这种行为会导致意想不到的结果。
+
+    //   所以在一般情况下没，除了Date()构造函数以外，很少需要用其他内置构造函数。
+</script>
+</body>
+</html>

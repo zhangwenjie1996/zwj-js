@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="jquery-1.11.3.js"></script>
+<script>
+//    1. extend能实现的功能
+//    其实从extend的含义里，我们就能知道extend是做什么的了。extend翻译成汉语后就是：延伸、扩展、推广。
+//
+//    1.1 将两个或更多对象的内容合并到第一个对象
+//
+//    我们来看看$.extend()提供的参数：jQuery.extend( target [, object1 ] [, objectN ] )，extend方法需要至少传入一个参数，第一个必需，后面的都是可选参数。若传给extend是两个或两个以上的参数都是对象类型，那么就会把后面所有对象的内容合并给target（第一个对象）上。
+//
+//function getOpt(option){
+//    var _default = {
+//        name : 'wenzi',
+//        age : '25',
+//        sex : 'male'
+//    }
+//    $.extend(_default, option);
+//    return _default;
+//}
+//getOpt();  // {name: wenzi, age: 25, sex: male}
+//getOpt({name:'bing'}); // {name: bing, age: 25, sex: male}
+//getOpt({name:'bing', age:36, sex:'female'});  // {name: bing, age: 36, sex: female}
+
+//    function getOpt(target, obj1, obj2, obj3){
+//        $.extend(target, obj1, obj2, obj3);
+//        return target;
+//    }
+//
+//    var _default = {
+//        name : 'wenzi',
+//        age : '25',
+//        sex : 'male'
+//    };
+//    var obj1 = {
+//        name : 'obj1'
+//    };
+//    var obj2 = {
+//        name : 'obj2',
+//        age : '36'
+//    };
+//    var obj3 = {
+//        age : '67',
+//        sex : {'error':'sorry;'}
+//        };
+//  console.log(getOpt(_default, obj1, obj2, obj3));
+
+//还有很重要的一点，$.extend()其实是有返回值的，返回的就是修改后的第一个参数的值。如我们可以把上面的函数修改成这样：
+//function getOpt(target, obj1, obj2, obj3){
+//   var result= $.extend(target, obj1, obj2, obj3);
+//    return result; // result即修改后的target值
+//}
+//
+//var _default = {
+//    name : 'wenzi',
+//    age : '25',
+//    sex : 'male'
+//};
+//var obj1 = {
+//    name : 'obj1'
+//};
+//var obj2 = {
+//    name : 'obj2',
+//    age : '36'
+//};
+//var obj3 = {
+//    age : '67',
+//    sex : {'error':'sorry;'}
+//};
+//console.log(getOpt(_default, obj1, obj2, obj3));
+//若我们传入的参数不想被修改，我们可以用一个空对象来作为第一个参数，然后获取$.extend()的返回值：$.extend()返回值就是修改后的第一个参数的值
+//function getOpt(target, obj1, obj2, obj3){
+//    var result = $.extend({}, target, obj1, obj2, obj3);
+//    return result; //  result即为{}修改后的值
+//}
+//var _default = {
+//    name : 'wenzi',
+//    age : '25',
+//    sex : 'male'
+//};
+//var obj1 = {
+//    name : 'obj1'
+//};
+//var obj2 = {
+//    name : 'obj2',
+//    age : '36'
+//};
+//var obj3 = {
+//    age : '67',
+//    sex : {'error':'sorry;'}
+//};
+//
+//console.log(getOpt(_default, obj1, obj2, obj3));
+
+//1.2 为JQUERY扩展方法或属性
+//
+//刚才我们在1.1中讲的$.extend()的例子都是传了两个或两个以上的参数，但其实只有一个参数是必须的。若只传一个参数会怎样呢。
+//
+//如果只有一个参数提供给$.extend()，这意味着目标参数被省略。在这种情况下，jQuery对象本身被默认为目标对象。这样，我们可以在jQuery的命名空间下添加新的功能。这对于插件开发者希望向 jQuery 中添加新函数时是很有用的。
+
+//$.extend({
+//    _name : 'wenzi',
+//    _getName : function(){
+//        return this._name;
+//    }
+//});
+//$._name; // wenzi
+//$._getName(); // wenzi
+
+//3. $.extend()与$.fn.extend()
+//上面讲解的全都是$.extend()，根本就没讲$.fn.extend()。可是，你有没有发现一个细节，在这段代码的第一行是怎么写的：
+// <code>jQuery.extend = jQuery.fn.extend = function(){}</code>
+//  也就是说$.extend()与$.fn.extend()共用的是同一个函数体，所有的操作都是一样的，只不过两个extend使用的对象不同罢了：$.extend()是在jQuery($)上进行操作的；而$.fn.extend()是在jQuery对象上进行操作的，如$(‘div’).extend().
+
+
+
+//jQuery为开发插件提拱了两个方法，分别是：
+
+//1. jQuery.fn.extend();
+
+//2. jQuery.extend();
+
+//虽然 javascript没有明确的类的概念，但是可以构建类似类的定义。
+//jQuery便是一个封装得非常好的类，比如，$("#btn1") 会生成一个 jQuery类的实例，理解这一点很重要。
+//(1). jQuery.extend(object);
+//
+//它是为jQuery类添加类方法，可以理解为添加静态方法。如：
+//
+//1).
+// jQuery.extend({
+//
+//    min: function(a, b) { return a < b ? a : b; },
+//
+//    max: function(a, b) { return a > b ? a : b; }
+//
+//});
+//
+//console.log(jQuery.min(2,3)); //  2
+//console.log(jQuery.max(4,5)); //  5
+
+//2).
+// jQuery.extend(target, object1, [objectN])用一个或多个其他对象来扩展一个对象，返回被扩展的对象。
+//，$.extend()其实是有返回值的，返回的就是修改后的第一个参数的值
+//var settings = { validate: false, limit: 5, name: "foo" };
+//var options = { validate: true, name: "bar" };
+//console.log(jQuery.extend(settings, options));
+//结果：settings == { validate: true, limit: 5, name: "bar" }
+
+
+//(2). jQuery.fn.extend(object);
+//$.fn是什么?
+// $.fn是指jQuery的命名空间，fn上的成员(方法function及属性property)，会对jQuery实例每一个有效。
+// $.extend()是为jQuery类$添加类方法，可以理解为添加静态方法
+//查看jQuery代码，就不难发现。
+
+//jQuery.fn = jQuery.prototype = {
+//    init: function( selector, context ) {//....　
+//    };
+
+//原来 jQuery.fn = jQuery.prototype.
+//所以，它是对jQuery.prototype进得扩展，就是为jQuery类添加“成员函数”。jQuery类的实例可以使用这个“成员函数”。
+//$.extend()是在jQuery($)上进行操作的；而$.fn.extend()是在jQuery对象上进行操作的，如$(‘div’).extend()
+//比如我们要开发一个插件，做一个特殊的编辑框，当它被点击时，便alert 当前编辑框里的内容。可以这么做：
+
+//$.fn.extend({
+//    doAlertWhileClick:function() {
+//        $(this).click(function(){
+//            alert($(this).val());
+//        });
+//    }
+//});
+//$("#input1").doAlertWhileClick(); // 页面上为：
+//
+//$("#input1")　为一个jQuery实例，当它调用成员方法 doAlertWhileClick后，便实现了扩展，每次被点击时它会先弹出目前编辑里的内容。
+
+// $.extend()与$.fn.extend()
+//上面讲解的全都是$.extend()，根本就没讲$.fn.extend()。可是，你有没有发现一个细节，在这段代码的第一行是怎么写的：
+// <code>jQuery.extend = jQuery.fn.extend = function(){}</code>
+//  也就是说$.extend()与$.fn.extend()共用的是同一个函数体，所有的操作都是一样的，只不过两个extend使用的对象不同罢了：$.extend()是在jQuery($)上进行操作的；而$.fn.extend()是在jQuery对象上进行操作的，如$(‘div’).extend().
+</script>
+</body>
+</html>

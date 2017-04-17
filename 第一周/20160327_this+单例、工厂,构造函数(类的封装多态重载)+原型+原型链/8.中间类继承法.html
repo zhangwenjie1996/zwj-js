@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中间类继承法(周氏继承法)-不兼容</title>
+</head>
+<body>
+<script type="text/javascript">
+    function avgFn() {
+        arguments.__proto__ = Array.prototype;
+        arguments.sort(function (a, b) {
+            return a - b;
+        });
+        arguments.pop();
+        arguments.shift();
+        return eval(arguments.join("+")) / arguments.length;
+    }
+
+    var ary = [10, 20, 45, 18, 52, 10, 40, 20, 30, 40]
+
+</script>
+</body>
+</html>

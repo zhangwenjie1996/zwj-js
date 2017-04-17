@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #menu {
+            position: relative;
+            background: black;
+            width: 150px;
+            height: 30px;
+            margin: 200px auto;
+            overflow: hidden;
+        }
+        #sc {
+            position: absolute;
+            background-color: #80ffff;
+            width: 150px;
+            height: 120px;
+            top: 0;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+
+<body>
+<div id="menu">
+    <div id="sc">
+        <ul>
+        <li>啊啊啊啊啊</li>
+        <li>啊啊啊啊啊</li>
+        <li>啊啊啊啊啊</li>
+        <li>啊啊啊啊啊</li>
+        <li>啊啊啊啊啊</li>
+        <li>啊啊啊啊啊</li>
+        </ul>
+    </div>
+</div>
+<script>
+    var menu = document.getElementById('menu');
+    var sc = document.getElementById('sc');
+    var interval;
+
+    function menuscroll() {
+        var top = parseFloat(sc.style.top) || sc.scrollTop;
+        top += 10;
+        sc.style.top = top + "px";
+    }
+    menu.onmouseenter = function() {
+        interval = setInterval("menuscroll()", 90);
+    }
+    menu.onmouseleave = function() {
+        clearInterval(interval);
+        sc.style.top = 0;
+    }
+</script>
+</body>
+
+</html>

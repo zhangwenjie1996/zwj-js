@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', 'json/data.json', true, 'username', 'pwd');
+    xhr.setRequestHeader('zwj', '123');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+//                xhr.overrideMimeType('text/plain');
+                var response = xhr.responseText;
+                document.write(response);
+//                var responseHeaders = xhr.getAllResponseHeaders();
+//                var responseHeader = xhr.getResponseHeader('content-type');
+            }
+        }
+    };
+
+    xhr.send();
+
+
+//跨域了
+//    var xhr= new XMLHttpRequest()
+//    xhr.open('get','http://www.baidu.com');
+//    xhr.onreadystatechange=function(){
+//        if(xhr.readyState === 4&&/2\d{2}/.test(xhr.status)){
+//            console.log(xhr.responseText)
+//        }
+//    }
+//    xhr.send();
+//    XMLHttpRequest cannot load https://www.baidu.com/. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.
+</script>
+</body>
+</html>

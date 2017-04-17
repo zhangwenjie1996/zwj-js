@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <button id="oSpan">0</button>
+</div>
+<script>
+    var timer = null;
+    document.getElementById("oSpan").addEventListener('mousedown', function () {
+        timer = window.setInterval(function () {
+            oSpan.innerHTML++;
+        }, 0)
+    });
+    document.getElementById("oSpan").addEventListener('mouseup', function () {
+        window.clearInterval(timer)
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<!--1. 如果不想输出第一项 (使用retrun true)进入 下一遍历-->
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+
+    var myArray=["skipThis", "dothis", "andThis"];
+    $.each(myArray, function(index, value) {
+        if (index == 0) {
+            return true; // equivalent to ‘continue' with a normal for loop
+        }
+// else do stuff…
+        alert (index + ": "+ value);
+    });
+
+</script>
+</body>
+</html>

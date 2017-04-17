@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //    localStorage.name='zwj';
+    //document.write(localStorage.name)
+    localStorage.setItem('name','zwj');
+    document.write(localStorage.getItem('name'));
+
+    if(localStorage.count){
+        localStorage.count=Number(localStorage.count)+1;
+    }else{
+        localStorage.count=1
+    }
+    document.write('访问了'+ localStorage.count+'次')
+
+</script>
+</body>
+</html>

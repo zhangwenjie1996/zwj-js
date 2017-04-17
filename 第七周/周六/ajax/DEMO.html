@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    /**
+     * @version 1.0
+     * @return {Object}
+     */
+    //    var getXHR = function () {
+    //
+    //        if (window.XMLHttpRequest) {
+    //            getXHR = function () {
+    //                return new XMLHttpRequest();
+    //            };
+    //            return new XMLHttpRequest();
+    //        }
+    //        getXHR = function () {
+    //            return new ActiveXObject('Microsoft.XMLHTTP');
+    //        };
+    //        return new ActiveXObject('Microsoft.XMLHTTP');
+    //
+    //    };
+    //    console.log('执行之前', getXHR);
+    //    console.log(getXHR());
+    //    console.log('执行之后', getXHR);
+    //getXHR=function () {
+    //        return new XMLHttpRequest();
+    //    };函数，此后在执行getXHR不再做判断
+
+    /**
+     * @version 2.0
+     * @return {Object}
+     */
+
+    var getXHROfV2 = (function () {
+        if (window.XMLHttpRequest) {
+            return function () {
+                return new XMLHttpRequest();
+            }
+        }
+        return function () {
+            return new ActiveXObject('Microsoft.XMLHTTP');
+        }
+    })();
+
+    var xhr = getXHROfV2();
+
+    console.log(xhr);
+
+</script>
+</body>
+</html>

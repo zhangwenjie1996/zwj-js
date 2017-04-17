@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*#head {*/
+            /*width: 100px;*/
+            /*height: 100px;*/
+            /*background: black;*/
+            /*margin: 10px auto;*/
+            /*display: block;*/
+        /*}*/
+        /*#head{*/
+            /*color: white;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div id="head" style="color: #ffffff;">sd</div>
+<script type="text/javascript">
+    //1、[curEle].style.[attr]:获取当前元素[curEle]的[attr]这个行内样式属性值
+    //->只有把样式写在行内,才能获取到,写在样式表中的样式是获取不到的
+    //console.log(box.style.paddingTop);//->"" 虽然我们把样式写在样式表中了,但是由于没有写在行内上,所以获取不到
+    //但是可以设置，设置之后可以获取到
+    var head = document.getElementById("head");
+//    head.style.width = "200px";
+//    head.style.height = "70px";
+//    head.style.display = "block";
+//    head.style.background = "red";
+//    console.log(head.style.margin)//获取不到
+//    console.log(head.style.background)//'red'
+
+
+//    obj.style.cssText=”样式” 这样就可以尽量避免页面reflow，提高页面性能。;
+//    head.style.cssText += "width:100px;height:100px;top:100px;left:100px;background:red"//+=为了不覆盖掉之前行内样式上的属性；若样式不在行内在内链style或外联css上 不用+=，也不用管ie的去行内样式上的最后一个；的问题即cssText（假如不为空）在IE中最后一个分号会被删掉（如上面的color：ffffff；的分号ie6会默认没有 如果不在前面加；会造成color：ffffffHEIGHT: 100px; WIDTH: 100px; BACKGROUND: red; LEFT: 100px; TOP: 100px）报错 因此，上面cssText累加的方法在IE中是无效的。
+//
+
+//    最后，可以在前面添加一个分号来解决这个问题：
+    head.style.cssText += ";width:100px;height:100px;top:100px;left:100px;background:red"
+</script>
+</body>
+</html>

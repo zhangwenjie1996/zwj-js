@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            margin: 10px auto;
+            width: 200px;
+            height: 200px;
+            background: orange;
+            cursor: pointer;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box" style="top: 50px;left: 500px;"></div>
+
+<script type="text/javascript">
+    var oBox = document.getElementById("box");
+    document.onkeyup = document.onkeydown = document.onkeypress = function (e) {
+        e = e || window.event;
+        var curT = parseFloat(oBox.style.top);
+        var curL = parseFloat(oBox.style.left);
+        if (e.keyCode === 37) {
+            oBox.style.left = curL - 100 + "px";
+        } if (e.keyCode === 39) {
+            oBox.style.left = curL + 100 + "px";
+        } if (e.keyCode === 38) {
+            oBox.style.top = curT - 10 + "px";
+        } if (e.keyCode === 40) {
+            oBox.style.top = curT + 10 + "px";
+        }
+
+
+    };
+</script>
+</body>
+</html>

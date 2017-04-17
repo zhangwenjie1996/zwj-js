@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-size: 14px;
+        }
+
+        #top1 {
+            margin: auto;
+            width: 1200px;
+            height: 647px;
+        }
+
+        #top2 {
+            margin: auto;
+            width: 1200px;
+            height: 457px;
+        }
+
+        #top3 {
+            margin: auto;
+            width: 1200px;
+            height: 597px;
+        }
+
+        #floor {
+            margin: 0 auto;
+            width: 1200px;
+        }
+
+        #fx {
+            display: none;
+            position: fixed;
+            left: 20px;
+            bottom: 200px;
+            width: 30px;
+            background: white;
+            text-align: center;
+        }
+
+        #fx div {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            border-bottom: 1px dashed black;
+            cursor: pointer;
+            background-color: white;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="top1"><img src="img/top1.png" alt=""/></div>
+<div id="top2"><img src="img/top2.png" alt=""/></div>
+<div id="top3"><img src="img/top3.png" alt=""/></div>
+<div id="floor">
+    <div id="floor1"><img src="img/floor1.png" alt=""/></div>
+    <div id="floor2"><img src="img/floor2.png" alt=""/></div>
+    <div id="floor3"><img src="img/floor3.png" alt=""/></div>
+    <div id="floor4"><img src="img/floor4.png" alt=""/></div>
+    <div id="floor5"><img src="img/floor5.png" alt=""/></div>
+    <div id="floor6"><img src="img/floor6.png" alt=""/></div>
+    <div id="floor7"><img src="img/floor7.png" alt=""/></div>
+</div>
+
+<div id="fx">
+    <div id="f1">F1</div>
+    <div id="f2">F2</div>
+    <div id="f3">F3</div>
+    <div id="f4">F4</div>
+    <div id="f5">F5</div>
+    <div id="f6">F6</div>
+    <div id="f7">F7</div>
+</div>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+    +function () {
+        var fx = document.getElementById("fx");
+        var fs = fx.children;
+        var text;
+        function windowscroll() {
+            var floor1 = document.getElementById("floor1");
+            var curF1 = utils.offset(floor1).top;
+            var curTop = utils.win("clientHeight") + utils.win("scrollTop");
+            fx.style.display = curTop > curF1 ? "block" : "none";
+            for (var i = 0; i < fs.length; i++) {
+                var floors = document.getElementById("floor").children;
+                var curF = utils.offset(floors[i]).top;
+                if(utils.win("scrollTop") < curF && curTop > curF){
+                    changeInner(i);
+                    fs[i].style.color="darkRed";
+                }else{
+                    fs[i].innerHTML="F"+(i+1);
+                    fs[i].style.color="black";
+                }
+            }
+        };
+
+        window.onscroll = windowscroll;
+
+        for (var i = 0; i < fs.length; i++) {
+            fs[i].index = i;
+            fs[i].onclick = function () {
+                var floors = document.getElementById("floor").children;
+                var curF = utils.offset(floors[this.index]).top;
+                var flag = -1;
+                if (utils.win("scrollTop") > curF) {
+                    flag = -1;
+                } else {
+                    flag = 1;
+                }
+                var target = utils.win("scrollTop");
+                var duration = 500;
+                var interval = 1;
+                var step = (target / duration) * interval;
+                var timer = window.setInterval(function () {
+                    var nowTop = utils.win("scrollTop");
+                    if ((nowTop <= curF && flag == -1) || (nowTop > curF && flag == 1)) {
+                        window.clearInterval(timer);
+                        window.onscroll = windowscroll;
+                        return;
+                    }
+                    utils.win("scrollTop", nowTop + step * flag);
+                }, interval)
+            };
+            function changeInner(index) {
+                switch (index) {
+                    case 0:
+                        fs[0].innerHTML = "服饰";
+                        break;
+                    case 1:
+                        fs[1].innerHTML = "美妆";
+                        break;
+                    case 2:
+                        fs[2].innerHTML = "手机";
+                        break;
+                    case 3:
+                        fs[3].innerHTML = "家电";
+                        break;
+                    case 4:
+                        fs[4].innerHTML = "数码";
+                        break;
+                    case 5:
+                        fs[5].innerHTML = "运动";
+                        break;
+                    case 6:
+                        fs[6].innerHTML = "居家";
+                        break;
+                }
+            };
+            fs[i].onmouseover = function () {
+                fs[this.index].style.backgroundColor = "darkred";
+                fs[this.index].style.color = "white";
+                text = fs[this.index].innerHTML;
+                changeInner(this.index);
+            };
+
+            fs[i].onmouseout = function () {
+                fs[this.index].style.backgroundColor = "white";
+                fs[this.index].style.color = "black";
+                fs[this.index].innerHTML = text;
+            };
+        }
+    }()
+</script>
+</body>
+</html>
